@@ -40,7 +40,7 @@ fn main() {
             .file(lua_dir.join("ldump.c"))
             .file(lua_dir.join("lfunc.c"))
             .file(lua_dir.join("lgc.c"))
-            .file(lua_dir.join("liolib.c"))
+            //.file(lua_dir.join("liolib.c"))
             .file(lua_dir.join("llex.c"))
             .file(lua_dir.join("lmathlib.c"))
             .file(lua_dir.join("lauxlib.c"))
