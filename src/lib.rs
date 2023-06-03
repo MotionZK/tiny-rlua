@@ -45,6 +45,7 @@
 mod macros;
 
 extern crate rlua_lua51_sys as ffi;
+extern crate alloc;
 
 mod context;
 mod conversion;
