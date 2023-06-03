@@ -1,6 +1,5 @@
 use std::any::Any;
 use std::borrow::Cow;
-#[cfg(rlua_lua51)]
 use std::ffi::CStr;
 use std::fmt::Write;
 use std::os::raw::{c_char, c_int, c_void};
@@ -188,7 +187,6 @@ pub unsafe fn pop_error(state: *mut ffi::lua_State, err_code: c_int) -> Error {
         let err_string = to_string(state, -1).into_owned();
         ffi::lua_pop(state, 1);
 
-        #[cfg(rlua_lua51)]
         const EOF_STR: &'static str = "'<eof>'";
         #[cfg(any(rlua_lua53, rlua_lua54))]
         const EOF_STR: &'static str = "<eof>";
@@ -233,7 +231,6 @@ unsafe fn newuserdatauv(state: *mut ffi::lua_State, size: usize, nuvalues: c_int
     ffi::lua_newuserdatauv(state, size, nuvalues)
 }
 
-#[cfg(any(rlua_lua53, rlua_lua51))]
 unsafe fn newuserdatauv(state: *mut ffi::lua_State, size: usize, nuvalues: c_int) -> *mut c_void {
     assert!(nuvalues <= 1 && nuvalues >= 0);
     ffi::lua_newuserdata(state, size)
@@ -293,7 +290,6 @@ pub unsafe fn push_userdata_uv<T>(
     Ok(())
 }
 
-#[cfg(any(rlua_lua53, rlua_lua51))]
 // Internally uses 4 stack spaces, does not call checkstack
 pub unsafe fn push_userdata_uv<T>(
     state: *mut ffi::lua_State,
@@ -384,7 +380,6 @@ pub unsafe fn init_userdata_metatable<T>(
         // On Lua 5.2+, lua_rawget conveniently returns the type
         #[cfg(any(rlua_lua53, rlua_lua54))]
         let index_type = ffi::lua_rawget(state, -3);
-        #[cfg(rlua_lua51)]
         let index_type = {
             ffi::lua_rawget(state, -3);
             ffi::lua_type(state, -1)
@@ -446,7 +441,6 @@ pub unsafe fn getiuservalue(state: *mut ffi::lua_State, index: c_int, n: c_int) 
     ffi::lua_getuservalue(state, index)
 }
 
-#[cfg(rlua_lua51)]
 // Wrapper around ffi::lua_getiuservalue, ffi::lua_getuservalue depending on the Lua version.
 // On Lua 5.1 this is emulated using ffi::lua_getfenv; the index must be 1.
 pub unsafe fn getiuservalue(state: *mut ffi::lua_State, index: c_int, n: c_int) -> c_int {
@@ -473,7 +467,6 @@ pub unsafe fn setiuservalue(state: *mut ffi::lua_State, index: c_int, n: c_int) 
     1
 }
 
-#[cfg(rlua_lua51)]
 // Wrapper around ffi::lua_setiuservalue or ffi::lua_setuservalue depending on the Lua version.
 // On Lua 5.1 this maps to ffi::lua_setfenv; index must be 1 and the value must be a table.
 pub unsafe fn setiuservalue(state: *mut ffi::lua_State, index: c_int, n: c_int) -> c_int {
@@ -509,7 +502,6 @@ pub unsafe fn do_resume(
     res
 }
 
-#[cfg(rlua_lua51)]
 // Wrapper around lua_resume(), with slight API differences ironed out.
 pub unsafe fn do_resume(
     state: *mut ffi::lua_State,
@@ -530,7 +522,6 @@ pub unsafe fn push_globaltable(state: *mut ffi::lua_State) {
     ffi::lua_rawgeti(state, ffi::LUA_REGISTRYINDEX, ffi::LUA_RIDX_GLOBALS);
 }
 
-#[cfg(rlua_lua51)]
 // The same as `ffi::lua_pushglobaltable()` in 5.2 onwards.
 pub unsafe fn push_globaltable(state: *mut ffi::lua_State) {
     ffi::lua_pushvalue(state, ffi::LUA_GLOBALSINDEX);
@@ -539,7 +530,6 @@ pub unsafe fn push_globaltable(state: *mut ffi::lua_State) {
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::lua_tointegerx as tointegerx;
 
-#[cfg(rlua_lua51)]
 // Wrapper implementing the `ffi::lua_tointegerx` API
 pub unsafe fn tointegerx(
     state: *mut ffi::lua_State,
@@ -573,7 +563,6 @@ pub unsafe fn tointegerx(
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::lua_tonumberx as tonumberx;
 
-#[cfg(rlua_lua51)]
 // Wrapper implementing the `ffi::lua_tonumberx` API
 pub unsafe fn tonumberx(
     state: *mut ffi::lua_State,
@@ -599,7 +588,6 @@ pub use ffi::lua_isinteger as isluainteger;
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::lua_rotate as rotate;
 
-#[cfg(rlua_lua51)]
 // Implementation of `lua_rotate` for Lua 5.1.
 pub unsafe fn rotate(state: *mut ffi::lua_State, index: c_int, n: c_int) {
     if n > 0 {
@@ -625,7 +613,6 @@ pub unsafe fn rotate(state: *mut ffi::lua_State, index: c_int, n: c_int) {
 #[cfg(any(rlua_lua53, rlua_lua54))]
 use ffi::lua_copy as copy;
 
-#[cfg(rlua_lua51)]
 pub unsafe fn copy(state: *mut ffi::lua_State, from: c_int, to: c_int) {
     // First copy the from idx to the top of stack
     ffi::lua_pushvalue(state, from);
@@ -642,7 +629,6 @@ pub unsafe fn copy(state: *mut ffi::lua_State, from: c_int, to: c_int) {
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::lua_rawlen as rawlen;
 
-#[cfg(rlua_lua51)]
 pub unsafe fn rawlen(state: *mut ffi::lua_State, index: c_int) -> usize {
     ffi::lua_objlen(state, index)
 }
@@ -650,7 +636,6 @@ pub unsafe fn rawlen(state: *mut ffi::lua_State, index: c_int) -> usize {
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::luaL_len as objlen;
 
-#[cfg(rlua_lua51)]
 pub unsafe fn objlen(state: *mut ffi::lua_State, index: c_int) -> ffi::lua_Integer {
     let meta_result = ffi::luaL_callmeta(state, index, cstr!("__len"));
     if meta_result == 1 {
@@ -667,7 +652,6 @@ pub unsafe fn objlen(state: *mut ffi::lua_State, index: c_int) -> ffi::lua_Integ
 #[cfg(any(rlua_lua53, rlua_lua54))]
 use ffi::lua_absindex as absindex;
 
-#[cfg(rlua_lua51)]
 unsafe fn absindex(state: *mut ffi::lua_State, index: c_int) -> c_int {
     let top = ffi::lua_gettop(state);
     if index > 0 && index <= top {
@@ -682,7 +666,6 @@ unsafe fn absindex(state: *mut ffi::lua_State, index: c_int) -> c_int {
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::lua_geti as geti;
 
-#[cfg(rlua_lua51)]
 pub unsafe fn geti(state: *mut ffi::lua_State, index: c_int, i: ffi::lua_Integer) -> c_int {
     let index = absindex(state, index);
     ffi::lua_pushnumber(state, i as ffi::lua_Number);
@@ -693,7 +676,6 @@ pub unsafe fn geti(state: *mut ffi::lua_State, index: c_int, i: ffi::lua_Integer
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::luaL_loadbufferx as loadbufferx;
 
-#[cfg(rlua_lua51)]
 // Implementation of luaL_loadbufferx for Lua 5.1.
 pub unsafe fn loadbufferx(
     state: *mut ffi::lua_State,
@@ -763,7 +745,6 @@ pub unsafe fn requiref(
     ffi::lua_pop(state, 1);
 }
 
-#[cfg(rlua_lua51)]
 // Replacement for luaL_requiref in lua 5.1.
 // This is only used internally to open builtin libraries, so isn't
 // a complete implementation.  For example, we don't check whether
@@ -792,7 +773,6 @@ pub unsafe fn requiref(
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::luaL_tolstring as tolstring;
 
-#[cfg(rlua_lua51)]
 // Implementation of luaL_tolstring
 pub unsafe fn tolstring(
     state: *mut ffi::lua_State,
@@ -814,7 +794,6 @@ pub unsafe fn tolstring(
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::luaL_traceback as traceback;
 
-#[cfg(rlua_lua51)]
 pub unsafe fn traceback(
     push_state: *mut ffi::lua_State,
     _state: *mut ffi::lua_State,
@@ -829,7 +808,6 @@ pub unsafe fn traceback(
 #[cfg(any(rlua_lua53, rlua_lua54))]
 pub use ffi::lua_dump as dump;
 
-#[cfg(rlua_lua51)]
 pub unsafe fn dump(
     state: *mut ffi::lua_State,
     writer: ffi::lua_Writer,
@@ -1288,7 +1266,6 @@ unsafe fn get_panic_metatable(state: *mut ffi::lua_State) -> bool {
     );
     #[cfg(any(rlua_lua53, rlua_lua54))]
     let mt_type = ffi::lua_rawget(state, ffi::LUA_REGISTRYINDEX);
-    #[cfg(rlua_lua51)]
     let mt_type = {
         ffi::lua_rawget(state, ffi::LUA_REGISTRYINDEX);
         ffi::lua_type(state, -1)

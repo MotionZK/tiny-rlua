@@ -482,7 +482,6 @@ impl<'lua> Context<'lua> {
                 ffi::LUA_REGISTRYINDEX,
                 key.registry_id as ffi::lua_Integer,
             );
-            #[cfg(any(rlua_lua51))]
             ffi::lua_rawgeti(self.state, ffi::LUA_REGISTRYINDEX, key.registry_id as c_int);
             self.pop_value()
         };
@@ -617,7 +616,6 @@ impl<'lua> Context<'lua> {
             }
 
             ffi::LUA_TNUMBER => {
-                #[cfg(any(rlua_lua51))]
                 {
                     let n = Value::Number(ffi::lua_tonumber(self.state, -1));
                     ffi::lua_pop(self.state, 1);
@@ -836,7 +834,6 @@ impl<'lua> Context<'lua> {
             ffi::LUA_REGISTRYINDEX,
             ud_index as ffi::lua_Integer,
         );
-        #[cfg(any(rlua_lua51))]
         ffi::lua_rawgeti(self.state, ffi::LUA_REGISTRYINDEX, ud_index as c_int);
         ffi::lua_setmetatable(self.state, -2);
 
@@ -889,7 +886,6 @@ impl<'lua> Context<'lua> {
                         self.push_value(env)?;
                         #[cfg(any(rlua_lua53, rlua_lua54))]
                         ffi::lua_setupvalue(self.state, -2, 1);
-                        #[cfg(rlua_lua51)]
                         {
                             let res = ffi::lua_setfenv(self.state, -2);
                             debug_assert!(res == 1);

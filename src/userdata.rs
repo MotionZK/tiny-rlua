@@ -424,7 +424,6 @@ impl<'lua> AnyUserData<'lua> {
                     ffi::LUA_REGISTRYINDEX,
                     lua.userdata_metatable::<T>()? as ffi::lua_Integer,
                 );
-                #[cfg(any(rlua_lua51))]
                 ffi::lua_rawgeti(
                     lua.state,
                     ffi::LUA_REGISTRYINDEX,

@@ -2,8 +2,6 @@ use std::any::TypeId;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::marker::PhantomData;
-#[cfg(rlua_lua54)]
-use std::os::raw::c_uint;
 use std::os::raw::{c_int, c_void};
 use std::ptr;
 use std::rc::Rc;
@@ -474,7 +472,6 @@ pub(crate) struct ExtraData {
 pub(crate) unsafe fn extra_data(state: *mut ffi::lua_State) -> *mut ExtraData {
     #[cfg(any(rlua_lua53, rlua_lua54))]
     return *(ffi::lua_getextraspace(state) as *mut *mut ExtraData);
-    #[cfg(rlua_lua51)]
     {
         let mut extra: *mut c_void = ptr::null_mut();
         let _ = ffi::lua_getallocf(state, &mut extra);
@@ -625,7 +622,6 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
                         end
                     end
                 "#;
-                #[cfg(rlua_lua51)]
                 let wrapload = r#"
                     do
                         -- load(chunk [, chunkname])
@@ -717,7 +713,6 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
                     ffi::lua_pushnil(state);
                     ffi::lua_setfield(state, -2, cstr!("loadlib"));
 
-                    #[cfg(rlua_lua51)]
                     let searchers_name = cstr!("loaders");
                     #[cfg(any(rlua_lua53, rlua_lua54))]
                     let searchers_name = cstr!("searchers");
@@ -758,7 +753,6 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
         // Place pointer to ExtraData in the lua_State "extra space"
         *(ffi::lua_getextraspace(state) as *mut *mut ExtraData) = Box::into_raw(extra);
     }
-    #[cfg(rlua_lua51)]
     // Prevent extra from being deallocated
     let _ = Box::into_raw(extra);
 

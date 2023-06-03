@@ -176,7 +176,6 @@ impl<'lua, 'scope> Scope<'lua, 'scope> {
                             assert_stack(lua.state, 1);
                             lua.push_ref(&u.0);
                             getiuservalue(lua.state, -1, 1);
-                            #[cfg(rlua_lua51)]
                             {
                                 // For lua 5.1 we wrap the lightuserdata in a table - extract it
                                 // and remove the table from the stack.
@@ -251,7 +250,6 @@ impl<'lua, 'scope> Scope<'lua, 'scope> {
             push_userdata_uv(lua.state, (), 1)?;
             #[cfg(any(rlua_lua53, rlua_lua54))]
             ffi::lua_pushlightuserdata(lua.state, data.as_ptr() as *mut c_void);
-            #[cfg(rlua_lua51)]
             {
                 // We have implemented setiuservalue in terms of lua_setfenv for Lua 5.1;
                 // lua_setfenv only allows setting a table as the environment - so we

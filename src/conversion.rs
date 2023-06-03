@@ -290,7 +290,6 @@ macro_rules! lua_convert_int {
         impl<'lua> ToLua<'lua> for $x {
             fn to_lua(self, _: Context<'lua>) -> Result<Value<'lua>> {
                 if let Some(i) = cast(self) {
-                    #[cfg(rlua_lua51)]
                     let result = Ok(Value::Number(i));
                     #[cfg(any(rlua_lua53, rlua_lua54))]
                     let result = Ok(Value::Integer(i));
