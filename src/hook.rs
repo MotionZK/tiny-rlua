@@ -1,6 +1,5 @@
-use std::ffi::CStr;
-use std::marker::PhantomData;
-use std::os::raw::{c_char, c_int};
+use core::ffi::{CStr, c_char, c_int};
+use core::marker::PhantomData;
 
 use crate::context::Context;
 use crate::ffi::{self, lua_Debug, lua_State};

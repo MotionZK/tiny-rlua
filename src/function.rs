@@ -1,7 +1,7 @@
-use std::os::raw::c_int;
-use std::ptr;
+use alloc::vec::Vec;
 
-use core::ffi::c_void;
+use core::ffi::{c_void, c_int};
+use core::ptr;
 
 use crate::error::{Error, Result};
 use crate::ffi;
@@ -199,7 +199,7 @@ impl<'lua> Function<'lua> {
             sz: usize,
             ud: *mut c_void,
         ) -> c_int {
-            let input_slice = std::slice::from_raw_parts(p as *const u8, sz);
+            let input_slice = core::slice::from_raw_parts(p as *const u8, sz);
             let vec = &mut *(ud as *mut Vec<u8>);
             vec.extend_from_slice(input_slice);
             0
