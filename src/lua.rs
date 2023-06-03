@@ -1,11 +1,16 @@
-use std::any::TypeId;
-use std::cell::RefCell;
-use std::collections::HashMap;
-use std::marker::PhantomData;
-use std::os::raw::{c_int, c_void};
-use std::ptr;
-use std::rc::Rc;
-use std::sync::{Arc, Mutex};
+use core::any::TypeId;
+use core::cell::RefCell;
+use core::marker::PhantomData;
+use core::ffi::{c_int, c_void};
+use core::ptr;
+
+use alloc::rc::Rc;
+use alloc::collections::BTreeMap;
+use alloc::vec::Vec;
+use alloc::boxed::Box;
+use alloc::sync::Arc;
+use lock_api::Mutex; //in place of std::sync::Mutex
+
 
 use bitflags::bitflags;
 
@@ -452,7 +457,7 @@ impl Default for Lua {
 
 // Data associated with the main lua_State via lua_getextraspace.
 pub(crate) struct ExtraData {
-    pub registered_userdata: HashMap<TypeId, c_int>,
+    pub registered_userdata: BTreeMap<TypeId, c_int>,
     pub registry_unref_list: Arc<Mutex<Option<Vec<c_int>>>>,
 
     pub ref_thread: *mut ffi::lua_State,
@@ -527,7 +532,7 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
     }
 
     let mut extra = Box::new(ExtraData {
-        registered_userdata: HashMap::new(),
+        registered_userdata: BTreeMap::new(),
         registry_unref_list: Arc::new(Mutex::new(Some(Vec::new()))),
         ref_thread: ptr::null_mut(),
         // We need 1 extra stack space to move values in and out of the ref stack.
@@ -699,12 +704,14 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
 
                 let result = dostring(state, wrapload);
                 if result != 0 {
-                    use std::ffi::CStr;
+                    use core::ffi::CStr;
                     let errmsg = ffi::lua_tostring(state, -1);
+                    // not sure how to handle this one after removing luaio
+                    /*
                     eprintln!(
                         "Internal error running setup code: {:?}",
                         CStr::from_ptr(errmsg)
-                    );
+                    );*/
                 }
                 assert_eq!(result, 0);
             }

@@ -26,6 +26,7 @@ num-traits = { version = "0.2.14", features = ["libm", "i128"], default_features
 bitflags = { version = "1.0.4" }
 bstr = {version = "0.2", default_features = false }
 rlua-lua51-sys = {path = "./crates/rlua-lua51-sys/"}
+lock_api = "0.4.9"
 
 [dev-dependencies]
 rustyline = "6.0"
