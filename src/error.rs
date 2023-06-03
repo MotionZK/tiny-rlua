@@ -1,8 +1,10 @@
-use std::error::Error as StdError;
-use std::fmt;
-use std::result::Result as StdResult;
-use std::string::String as StdString;
-use std::sync::Arc;
+use core::error::Error as StdError;
+use core::result::Result as StdResult;
+use core::fmt;
+
+use alloc::string::String as StdString;
+use alloc::sync::Arc;
+use alloc::boxed::Box;
 
 /// Error type returned by `rlua` methods.
 #[derive(Debug, Clone)]

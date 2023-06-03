@@ -39,6 +39,7 @@
 // Deny warnings inside doc tests / examples. When this isn't present, rustdoc doesn't show *any*
 // warnings at all.
 #![cfg_attr(not(feature = "std"), no_std)]
+#![feature(error_in_core)]
 #![doc(test(attr(deny(warnings))))]
 
 #[macro_use]
