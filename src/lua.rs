@@ -8,7 +8,6 @@ use std::rc::Rc;
 use std::sync::{Arc, Mutex};
 
 use bitflags::bitflags;
-use libc;
 
 use crate::context::Context;
 use crate::error::Result;
@@ -100,7 +99,7 @@ impl Drop for Lua {
             );
             *rlua_expect!((*extra).registry_unref_list.lock(), "unref list poisoned") = None;
             ffi::lua_close(self.main_state);
-            Box::from_raw(extra);
+            drop(Box::from_raw(extra));
         }
     }
 }
