@@ -704,9 +704,9 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
 
                 let result = dostring(state, wrapload);
                 if result != 0 {
-                    use core::ffi::CStr;
+                    //use core::ffi::CStr;
                     let errmsg = ffi::lua_tostring(state, -1);
-                    // not sure how to handle this one after removing luaio
+                    // TODO: not sure how to handle this one after removing luaio
                     /*
                     eprintln!(
                         "Internal error running setup code: {:?}",
