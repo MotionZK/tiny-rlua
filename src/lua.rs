@@ -479,6 +479,11 @@ pub(crate) unsafe fn extra_data(state: *mut ffi::lua_State) -> *mut ExtraData {
     }
 }
 
+extern "C" {
+    fn free(ptr: *mut c_void);
+    fn realloc(ptr: *mut c_void, size: usize) -> *mut c_void;
+}
+
 unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
     unsafe extern "C" fn allocator(
         extra_data: *mut c_void,
@@ -509,10 +514,10 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
 
         if nsize == 0 {
             (*extra_data).used_memory = new_used_memory;
-            libc::free(ptr as *mut libc::c_void);
+            free(ptr as *mut c_void);
             ptr::null_mut()
         } else {
-            let p = libc::realloc(ptr as *mut libc::c_void, nsize) as *mut c_void;
+            let p = realloc(ptr as *mut c_void, nsize) as *mut c_void;
             if !p.is_null() {
                 // Only commit the new used memory if the allocation was successful.  Probably in
                 // reality, libc::realloc will never fail.

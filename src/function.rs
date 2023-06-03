@@ -1,7 +1,7 @@
 use std::os::raw::c_int;
 use std::ptr;
 
-use libc::c_void;
+use core::ffi::c_void;
 
 use crate::error::{Error, Result};
 use crate::ffi;
