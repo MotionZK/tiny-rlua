@@ -1,8 +1,10 @@
-use std::collections::{BTreeMap, HashMap};
-use std::convert::TryInto;
-use std::ffi::{CStr, CString};
-use std::hash::{BuildHasher, Hash};
-use std::string::String as StdString;
+extern crate alloc;
+use alloc::vec::Vec;
+use alloc::string::String as StdString;
+use alloc::format;
+
+use core::convert::TryInto;
+use core::ffi::CStr;
 
 use bstr::BStr;
 use num_traits::cast;
@@ -223,20 +225,20 @@ impl<'lua, 'a> ToLua<'lua> for &'a str {
     }
 }
 
-impl<'lua> ToLua<'lua> for CString {
+impl<'lua> ToLua<'lua> for CStr {
     fn to_lua(self, lua: Context<'lua>) -> Result<Value<'lua>> {
         Ok(Value::String(lua.create_string(self.as_bytes())?))
     }
 }
 
-impl<'lua> FromLua<'lua> for CString {
+impl<'lua> FromLua<'lua> for CStr {
     fn from_lua(value: Value<'lua>, lua: Context<'lua>) -> Result<Self> {
         let ty = value.type_name();
         let string = lua
             .coerce_string(value)?
             .ok_or_else(|| Error::FromLuaConversionError {
                 from: ty,
-                to: "CString",
+                to: "CStr",
                 message: Some("expected string or number".to_string()),
             })?;
 
@@ -244,7 +246,7 @@ impl<'lua> FromLua<'lua> for CString {
             Ok(s) => Ok(s.into()),
             Err(_) => Err(Error::FromLuaConversionError {
                 from: ty,
-                to: "CString",
+                to: "CStr",
                 message: Some("invalid C-style string".to_string()),
             }),
         }
@@ -344,7 +346,7 @@ macro_rules! lua_convert_float {
                     .and_then(|n| {
                         // We want out of range f32 to return an error instead
                         // of inf.
-                        if std::mem::size_of::<$x>() < std::mem::size_of::<f64>() {
+                        if core::mem::size_of::<$x>() < core::mem::size_of::<f64>() {
                             if n.is_finite() && n.abs() > (<$x>::MAX as f64) {
                                 return Err(Error::FromLuaConversionError {
                                     from: ty,
@@ -425,50 +427,6 @@ impl<'lua, T: FromLua<'lua>> FromLua<'lua> for Vec<T> {
             Err(Error::FromLuaConversionError {
                 from: value.type_name(),
                 to: "Vec",
-                message: Some("expected table".to_string()),
-            })
-        }
-    }
-}
-
-impl<'lua, K: Eq + Hash + ToLua<'lua>, V: ToLua<'lua>, S: BuildHasher> ToLua<'lua>
-    for HashMap<K, V, S>
-{
-    fn to_lua(self, lua: Context<'lua>) -> Result<Value<'lua>> {
-        Ok(Value::Table(lua.create_table_from(self)?))
-    }
-}
-
-impl<'lua, K: Eq + Hash + FromLua<'lua>, V: FromLua<'lua>, S: BuildHasher + Default> FromLua<'lua>
-    for HashMap<K, V, S>
-{
-    fn from_lua(value: Value<'lua>, _: Context<'lua>) -> Result<Self> {
-        if let Value::Table(table) = value {
-            table.pairs().collect()
-        } else {
-            Err(Error::FromLuaConversionError {
-                from: value.type_name(),
-                to: "HashMap",
-                message: Some("expected table".to_string()),
-            })
-        }
-    }
-}
-
-impl<'lua, K: Ord + ToLua<'lua>, V: ToLua<'lua>> ToLua<'lua> for BTreeMap<K, V> {
-    fn to_lua(self, lua: Context<'lua>) -> Result<Value<'lua>> {
-        Ok(Value::Table(lua.create_table_from(self)?))
-    }
-}
-
-impl<'lua, K: Ord + FromLua<'lua>, V: FromLua<'lua>> FromLua<'lua> for BTreeMap<K, V> {
-    fn from_lua(value: Value<'lua>, _: Context<'lua>) -> Result<Self> {
-        if let Value::Table(table) = value {
-            table.pairs().collect()
-        } else {
-            Err(Error::FromLuaConversionError {
-                from: value.type_name(),
-                to: "BTreeMap",
                 message: Some("expected table".to_string()),
             })
         }
