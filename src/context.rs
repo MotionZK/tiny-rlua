@@ -1,10 +1,14 @@
-use std::any::TypeId;
-use std::cell::RefCell;
-use std::ffi::CString;
-use std::marker::PhantomData;
-use std::os::raw::{c_char, c_int, c_void};
-use std::sync::Arc;
-use std::{mem, ptr};
+extern crate alloc;
+use alloc::rc::Rc;
+use alloc::boxed::Box;
+use alloc::vec::Vec;
+
+use core::any::TypeId;
+use core::cell::RefCell;
+use core::ffi::CStr;
+use core::marker::PhantomData;
+use core::ffi::{c_char, c_int, c_void};
+use core::{mem, ptr};
 
 use crate::error::{Error, Result};
 use crate::ffi;
@@ -516,7 +520,7 @@ impl<'lua> Context<'lua> {
     /// matching `Lua` state.
     pub fn owns_registry_value(self, key: &RegistryKey) -> bool {
         unsafe {
-            Arc::ptr_eq(
+            Rc::ptr_eq(
                 &key.unref_list,
                 &(*extra_data(self.state)).registry_unref_list,
             )
@@ -851,7 +855,7 @@ impl<'lua> Context<'lua> {
     fn load_chunk(
         &self,
         source: &[u8],
-        name: Option<&CString>,
+        name: Option<&CStr>,
         env: Option<Value<'lua>>,
         allow_binary: bool,
     ) -> Result<Function<'lua>> {
@@ -906,7 +910,7 @@ impl<'lua> Context<'lua> {
 pub struct Chunk<'lua, 'a> {
     context: Context<'lua>,
     source: &'a [u8],
-    name: Option<CString>,
+    name: Option<CStr>,
     env: Option<Value<'lua>>,
 }
 
@@ -914,7 +918,7 @@ impl<'lua, 'a> Chunk<'lua, 'a> {
     /// Sets the name of this chunk, which results in more informative error traces.
     pub fn set_name<S: ?Sized + AsRef<[u8]>>(mut self, name: &S) -> Result<Chunk<'lua, 'a>> {
         let name =
-            CString::new(name.as_ref().to_vec()).map_err(|e| Error::ToLuaConversionError {
+            CStr::new(name.as_ref().to_vec()).map_err(|e| Error::ToLuaConversionError {
                 from: "&str",
                 to: "string",
                 message: Some(e.to_string()),
