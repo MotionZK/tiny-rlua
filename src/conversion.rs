@@ -1,6 +1,10 @@
 use alloc::vec::Vec;
+use alloc::collections::BTreeMap;
 use alloc::string::String as StdString;
 use alloc::format;
+use alloc::ffi::CString;
+use alloc::string::ToString;
+use alloc::borrow::ToOwned;
 
 use core::convert::TryInto;
 use core::ffi::CStr;
@@ -224,20 +228,20 @@ impl<'lua, 'a> ToLua<'lua> for &'a str {
     }
 }
 
-impl<'lua> ToLua<'lua> for CStr {
+impl<'lua> ToLua<'lua> for CString {
     fn to_lua(self, lua: Context<'lua>) -> Result<Value<'lua>> {
         Ok(Value::String(lua.create_string(self.as_bytes())?))
     }
 }
 
-impl<'lua> FromLua<'lua> for CStr {
+impl<'lua> FromLua<'lua> for CString {
     fn from_lua(value: Value<'lua>, lua: Context<'lua>) -> Result<Self> {
         let ty = value.type_name();
         let string = lua
             .coerce_string(value)?
             .ok_or_else(|| Error::FromLuaConversionError {
                 from: ty,
-                to: "CStr",
+                to: "CString",
                 message: Some("expected string or number".to_string()),
             })?;
 
@@ -245,14 +249,14 @@ impl<'lua> FromLua<'lua> for CStr {
             Ok(s) => Ok(s.into()),
             Err(_) => Err(Error::FromLuaConversionError {
                 from: ty,
-                to: "CStr",
+                to: "CString",
                 message: Some("invalid C-style string".to_string()),
             }),
         }
     }
 }
 
-impl<'lua, 'a> ToLua<'lua> for &'a CStr {
+impl<'lua, 'a> ToLua<'lua> for &'a CString {
     fn to_lua(self, lua: Context<'lua>) -> Result<Value<'lua>> {
         Ok(Value::String(lua.create_string(self.to_bytes())?))
     }
@@ -426,6 +430,26 @@ impl<'lua, T: FromLua<'lua>> FromLua<'lua> for Vec<T> {
             Err(Error::FromLuaConversionError {
                 from: value.type_name(),
                 to: "Vec",
+                message: Some("expected table".to_string()),
+            })
+        }
+    }
+}
+
+impl<'lua, K: Ord + ToLua<'lua>, V: ToLua<'lua>> ToLua<'lua> for BTreeMap<K, V> {
+    fn to_lua(self, lua: Context<'lua>) -> Result<Value<'lua>> {
+        Ok(Value::Table(lua.create_table_from(self)?))
+    }
+}
+
+impl<'lua, K: Ord + FromLua<'lua>, V: FromLua<'lua>> FromLua<'lua> for BTreeMap<K, V> {
+    fn from_lua(value: Value<'lua>, _: Context<'lua>) -> Result<Self> {
+        if let Value::Table(table) = value {
+            table.pairs().collect()
+        } else {
+            Err(Error::FromLuaConversionError {
+                from: value.type_name(),
+                to: "BTreeMap",
                 message: Some("expected table".to_string()),
             })
         }
