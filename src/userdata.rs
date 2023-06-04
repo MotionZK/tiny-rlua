@@ -1,5 +1,7 @@
-use std::cell::{Ref, RefCell, RefMut};
-use std::os::raw::c_int;
+use alloc::format;
+
+use core::cell::{Ref, RefCell, RefMut};
+use core::ffi::c_int;
 
 use crate::context::Context;
 use crate::error::{Error, Result};

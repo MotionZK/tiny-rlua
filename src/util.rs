@@ -1,11 +1,16 @@
-use std::any::Any;
-use std::borrow::Cow;
-use std::ffi::CStr;
-use std::fmt::Write;
-use std::os::raw::{c_char, c_int, c_void};
-use std::panic::{catch_unwind, resume_unwind, AssertUnwindSafe};
-use std::sync::Arc;
-use std::{mem, ptr, slice};
+use alloc::borrow::Cow;
+use alloc::sync::Arc;
+use alloc::boxed::Box;
+use alloc::string::String;
+use alloc::fmt::Write;
+use alloc::format;
+use alloc::string::ToString;
+use alloc::borrow::ToOwned;
+
+use core::any::Any;
+use core::ffi::{CStr, c_char, c_int, c_void};
+use core::panic::{UnwindSafe, AssertUnwindSafe};
+use core::{mem, ptr, slice};
 
 use crate::error::{Error, Result};
 use crate::ffi;
@@ -176,13 +181,13 @@ pub unsafe fn pop_error(state: *mut ffi::lua_State, err_code: c_int) -> Error {
     if let Some(err) = get_wrapped_error(state, -1).as_ref() {
         ffi::lua_pop(state, 1);
         err.clone()
-    } else if is_wrapped_panic(state, -1) {
+    /*} *else if is_wrapped_panic(state, -1) {
         let panic = get_userdata::<WrappedPanic>(state, -1);
         if let Some(p) = (*panic).0.take() {
             resume_unwind(p);
         } else {
             rlua_panic!("error during panic handling, panic was resumed twice")
-        }
+        }*/
     } else {
         let err_string = to_string(state, -1).into_owned();
         ffi::lua_pop(state, 1);
@@ -645,7 +650,7 @@ pub unsafe fn objlen(state: *mut ffi::lua_State, index: c_int) -> ffi::lua_Integ
         result
     } else {
         let result = ffi::lua_objlen(state, index);
-        use std::convert::TryInto;
+        use core::convert::TryInto;
         result.try_into().unwrap()
     }
 }
@@ -869,7 +874,7 @@ where
         }
         Err(p) => {
             ffi::lua_settop(state, 1);
-            ptr::write(ud as *mut WrappedPanic, WrappedPanic(Some(p)));
+            ptr::write(ud as *mut WrappedPanic, WrappedPanic(Some(Box::new(p))));
 
             if get_panic_metatable(state) {
                 ffi::lua_setmetatable(state, -2);
@@ -880,7 +885,11 @@ where
                 // safeul through Lua have not been enabled.
                 // We can't allow a panic to cross the C/Rust boundary, so the
                 // only choice is to abort.
-                std::process::abort()
+                
+                //note: above comment is from the original project, I'm pretty
+                //okay with allowing panics to cross the boundary for the
+                //expected use case
+                core::intrinsics::abort()
             }
         }
     }
@@ -1290,3 +1299,12 @@ static ERROR_METATABLE_REGISTRY_KEY: u8 = 0;
 static PANIC_METATABLE_REGISTRY_KEY: u8 = 0;
 static DESTRUCTED_USERDATA_METATABLE: u8 = 0;
 static ERROR_PRINT_BUFFER_KEY: u8 = 0;
+fn catch_unwind<F: core::ops::FnOnce() -> R + UnwindSafe, R>(f: F) -> Result<R> {
+    f(); // still run f but error out immediately
+    Err(Error::RuntimeError("no unwind".to_string()))
+}
+/*
+// We can implement these for unwinding but that may be unneccesary 
+fn resume_unwind(payload: Box<dyn Any + Send>) -> ! {}
+fn panic_without_hook(payload: Box<dyn Any + Send>) -> ! {}
+*/

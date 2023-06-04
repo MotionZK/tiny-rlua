@@ -1,6 +1,9 @@
-use std::os::raw::{c_int, c_void};
-use std::sync::{Arc, Mutex};
-use std::{fmt, mem, ptr};
+use alloc::sync::Arc;
+use alloc::vec::Vec;
+use alloc::boxed::Box;
+
+use core::ffi::{c_int, c_void};
+use core::{fmt, mem, ptr};
 
 use crate::context::Context;
 use crate::error::Result;
@@ -48,7 +51,7 @@ pub(crate) type Callback<'lua, 'a> =
 /// [`UserData::get_i_user_value`]: struct.UserData.html#method.get_user_value
 pub struct RegistryKey {
     pub(crate) registry_id: c_int,
-    pub(crate) unref_list: Arc<Mutex<Option<Vec<c_int>>>>,
+    pub(crate) unref_list: Arc<Mutex<Option<Vec<c_int>>>>
 }
 
 impl fmt::Debug for RegistryKey {
@@ -59,9 +62,11 @@ impl fmt::Debug for RegistryKey {
 
 impl Drop for RegistryKey {
     fn drop(&mut self) {
-        if let Some(list) = rlua_expect!(self.unref_list.lock(), "unref_list poisoned").as_mut() {
-            list.push(self.registry_id);
-        }
+        let list = rlua_expect!(
+            lock_api::MutexGuard::leak(self.unref_list.lock()).as_mut(),
+            "unref_list_poisoned"
+        );
+        list.push(self.registry_id);
     }
 }
 
@@ -99,3 +104,18 @@ impl<'lua> Drop for LuaRef<'lua> {
         self.lua.drop_ref(self)
     }
 }
+
+//VERY questionable
+pub (crate) type Mutex<T> = lock_api::Mutex<RawMutex, T>;
+pub (crate) struct RawMutex {}
+
+unsafe impl lock_api::RawMutex for RawMutex {
+    const INIT: RawMutex = RawMutex {};
+    
+    type GuardMarker = lock_api::GuardNoSend;
+
+    fn lock(&self) {}
+    fn try_lock(&self) -> bool {true}
+    unsafe fn unlock(&self) {}
+}
+

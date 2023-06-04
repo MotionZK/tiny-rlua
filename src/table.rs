@@ -1,5 +1,5 @@
-use std::marker::PhantomData;
-use std::os::raw::c_int;
+use core::marker::PhantomData;
+use core::ffi::c_int;
 
 use crate::error::Result;
 use crate::ffi;

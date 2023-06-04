@@ -1,5 +1,8 @@
-use std::iter::{self, FromIterator};
-use std::{slice, str, vec};
+use alloc::vec;
+use alloc::vec::Vec;
+
+use core::iter::{self, FromIterator};
+use core::{slice, str};
 
 use crate::context::Context;
 use crate::error::{Error, Result};

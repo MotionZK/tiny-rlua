@@ -1,5 +1,7 @@
-use std::hash::Hash;
-use std::{slice, str};
+use alloc::string::ToString;
+
+use core::hash::Hash;
+use core::{slice, str};
 
 use crate::error::{Error, Result};
 use crate::ffi;
@@ -112,7 +114,7 @@ where
 impl<'lua> Eq for String<'lua> {}
 
 impl<'lua> Hash for String<'lua> {
-    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+    fn hash<H: core::hash::Hasher>(&self, state: &mut H) {
         self.as_bytes().hash(state);
     }
 }

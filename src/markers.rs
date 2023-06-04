@@ -1,5 +1,5 @@
-use std::cell::{Cell, UnsafeCell};
-use std::marker::PhantomData;
+use core::cell::{Cell, UnsafeCell};
+use core::marker::PhantomData;
 
 pub type NoRefUnwindSafe = PhantomData<UnsafeCell<()>>;
 pub type NoUnwindSafe = PhantomData<*mut NoRefUnwindSafe>;

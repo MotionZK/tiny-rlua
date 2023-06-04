@@ -9,8 +9,6 @@ use alloc::collections::BTreeMap;
 use alloc::vec::Vec;
 use alloc::boxed::Box;
 use alloc::sync::Arc;
-use lock_api::Mutex; //in place of std::sync::Mutex
-
 
 use bitflags::bitflags;
 
@@ -19,7 +17,7 @@ use crate::error::Result;
 use crate::ffi;
 use crate::hook::{hook_proc, Debug, HookTriggers};
 use crate::markers::NoRefUnwindSafe;
-use crate::types::Callback;
+use crate::types::{Callback, Mutex};
 use crate::util::{
     assert_stack, dostring, init_error_registry, protect_lua_closure, push_globaltable, rawlen,
     requiref, safe_pcall, safe_xpcall, userdata_destructor,
@@ -102,7 +100,8 @@ impl Drop for Lua {
                     && (*extra).ref_stack_max as usize == (*extra).ref_free.len(),
                 "reference leak detected"
             );
-            *rlua_expect!((*extra).registry_unref_list.lock(), "unref list poisoned") = None;
+            //*rlua_expect!((*extra).registry_unref_list.lock(), "unref list poisoned") = None;
+            *lock_api::MutexGuard::leak((*extra).registry_unref_list.lock()) = None;
             ffi::lua_close(self.main_state);
             drop(Box::from_raw(extra));
         }
@@ -458,7 +457,7 @@ impl Default for Lua {
 // Data associated with the main lua_State via lua_getextraspace.
 pub(crate) struct ExtraData {
     pub registered_userdata: BTreeMap<TypeId, c_int>,
-    pub registry_unref_list: Arc<Mutex<Option<Vec<c_int>>>>,
+    pub registry_unref_list: Arc<Mutex<Option<Vec<c_int>>>>, 
 
     pub ref_thread: *mut ffi::lua_State,
     pub ref_stack_size: c_int,
@@ -533,7 +532,7 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
 
     let mut extra = Box::new(ExtraData {
         registered_userdata: BTreeMap::new(),
-        registry_unref_list: Arc::new(Mutex::new(Some(Vec::new()))),
+        registry_unref_list: Arc::new(Mutex::new(Some(Vec::with_capacity(256)))),
         ref_thread: ptr::null_mut(),
         // We need 1 extra stack space to move values in and out of the ref stack.
         ref_stack_size: ffi::LUA_MINSTACK - 1,
@@ -705,8 +704,9 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
                 let result = dostring(state, wrapload);
                 if result != 0 {
                     //use core::ffi::CStr;
-                    let errmsg = ffi::lua_tostring(state, -1);
                     // TODO: not sure how to handle this one after removing luaio
+                    // error message left for easier debugging
+                    let _errmsg = ffi::lua_tostring(state, -1);
                     /*
                     eprintln!(
                         "Internal error running setup code: {:?}",

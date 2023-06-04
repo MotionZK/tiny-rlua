@@ -1,6 +1,8 @@
-use std::iter::FromIterator;
-use std::ops::{Deref, DerefMut};
-use std::result::Result as StdResult;
+use alloc::vec::Vec;
+
+use core::iter::FromIterator;
+use core::ops::{Deref, DerefMut};
+use core::result::Result as StdResult;
 
 use crate::context::Context;
 use crate::error::Result;

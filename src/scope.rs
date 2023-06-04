@@ -1,9 +1,12 @@
-use std::any::Any;
-use std::cell::RefCell;
-use std::marker::PhantomData;
-use std::mem;
-use std::os::raw::c_void;
-use std::rc::Rc;
+use alloc::rc::Rc;
+use alloc::boxed::Box;
+use alloc::vec::Vec;
+
+use core::any::Any;
+use core::cell::RefCell;
+use core::marker::PhantomData;
+use core::mem;
+use core::ffi::c_void;
 
 use crate::context::Context;
 use crate::error::{Error, Result};

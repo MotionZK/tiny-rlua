@@ -1,11 +1,11 @@
-use alloc::rc::Rc;
 use alloc::boxed::Box;
 use alloc::sync::Arc;
 use alloc::vec::Vec;
+use alloc::ffi::CString;
+use alloc::string::ToString;
 
 use core::any::TypeId;
 use core::cell::RefCell;
-use core::ffi::CStr;
 use core::marker::PhantomData;
 use core::ffi::{c_char, c_int, c_void};
 use core::{mem, ptr};
@@ -522,6 +522,7 @@ impl<'lua> Context<'lua> {
         unsafe {
             Arc::ptr_eq(
                 &key.unref_list,
+                //lock_api::MutexGuard::mutex(*extra_data(self.state).registry_unref_list),
                 &(*extra_data(self.state)).registry_unref_list,
             )
         }
@@ -535,10 +536,13 @@ impl<'lua> Context<'lua> {
     pub fn expire_registry_values(self) {
         unsafe {
             let unref_list = mem::replace(
+                /*
                 &mut *rlua_expect!(
                     (*extra_data(self.state)).registry_unref_list.lock(),
                     "unref list poisoned"
-                ),
+                ),*/
+                // watch this line
+                lock_api::MutexGuard::leak((*extra_data(self.state)).registry_unref_list.lock()),
                 Some(Vec::new()),
             );
             for id in rlua_expect!(unref_list, "unref list not set") {
@@ -855,7 +859,7 @@ impl<'lua> Context<'lua> {
     fn load_chunk(
         &self,
         source: &[u8],
-        name: Option<&CStr>,
+        name: Option<&CString>,
         env: Option<Value<'lua>>,
         allow_binary: bool,
     ) -> Result<Function<'lua>> {
@@ -910,7 +914,7 @@ impl<'lua> Context<'lua> {
 pub struct Chunk<'lua, 'a> {
     context: Context<'lua>,
     source: &'a [u8],
-    name: Option<CStr>,
+    name: Option<CString>,
     env: Option<Value<'lua>>,
 }
 
@@ -918,7 +922,7 @@ impl<'lua, 'a> Chunk<'lua, 'a> {
     /// Sets the name of this chunk, which results in more informative error traces.
     pub fn set_name<S: ?Sized + AsRef<[u8]>>(mut self, name: &S) -> Result<Chunk<'lua, 'a>> {
         let name =
-            CStr::new(name.as_ref().to_vec()).map_err(|e| Error::ToLuaConversionError {
+            CString::new(name.as_ref().to_vec()).map_err(|e| Error::ToLuaConversionError {
                 from: "&str",
                 to: "string",
                 message: Some(e.to_string()),
