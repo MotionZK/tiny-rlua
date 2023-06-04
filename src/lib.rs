@@ -40,6 +40,7 @@
 // warnings at all.
 #![cfg_attr(not(feature = "std"), no_std)]
 #![feature(error_in_core)]
+#![feature(core_intrinsics)]
 #![doc(test(attr(deny(warnings))))]
 
 #[macro_use]
