@@ -1,5 +1,6 @@
 use alloc::rc::Rc;
 use alloc::boxed::Box;
+use alloc::sync::Arc;
 use alloc::vec::Vec;
 
 use core::any::TypeId;
@@ -519,7 +520,7 @@ impl<'lua> Context<'lua> {
     /// matching `Lua` state.
     pub fn owns_registry_value(self, key: &RegistryKey) -> bool {
         unsafe {
-            Rc::ptr_eq(
+            Arc::ptr_eq(
                 &key.unref_list,
                 &(*extra_data(self.state)).registry_unref_list,
             )
