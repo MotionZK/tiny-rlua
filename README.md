@@ -1,4 +1,4 @@
-# tiny-rlua -- High level bindings between Rust and Lua for embedded-ish 32-bit RISC-V targets
+# tiny-rlua -- High level Rust <-> Lua bindings for embedded-ish 32-bit RISC-V devices
 
 [Guided Tour](examples/guided_tour.rs)
 
