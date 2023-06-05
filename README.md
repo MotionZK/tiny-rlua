@@ -3,7 +3,8 @@
 [Guided Tour](examples/guided_tour.rs)
 
 This library is a high level interface between Rust and Lua.  Its goal is to be
-an easy to use, practical, flexible, and *safe* API between Rust and Lua.
+an easy to use, practical, flexible, and *safe* API between Rust and Lua for
+risv32im environments like [RISC Zero](https://github.com/risc0/risc0).
 
 ## Safety + API stability
 
