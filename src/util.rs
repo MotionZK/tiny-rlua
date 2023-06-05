@@ -551,7 +551,7 @@ pub unsafe fn tointegerx(
         // to fail as Lua 5.3+ do.
         let val = ffi::lua_tonumber(state, index);
         if val.is_finite()
-            && val.ceil() == val
+            && core::intrinsics::ceilf64(val) == val
             && val <= ffi::lua_Integer::max_value() as ffi::lua_Number
             && val >= ffi::lua_Integer::min_value() as ffi::lua_Number
         {

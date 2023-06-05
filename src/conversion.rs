@@ -11,6 +11,8 @@ use core::ffi::CStr;
 
 use bstr::BStr;
 use num_traits::cast;
+use num_traits::float::Float;
+use num_traits;
 
 use crate::context::Context;
 use crate::error::{Error, Result};

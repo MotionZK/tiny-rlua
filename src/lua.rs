@@ -481,11 +481,12 @@ pub(crate) unsafe fn extra_data(state: *mut ffi::lua_State) -> *mut ExtraData {
         return extra as *mut ExtraData;
     }
 }
-
+/*
 extern "C" {
     fn free(ptr: *mut c_void);
     fn realloc(ptr: *mut c_void, size: usize) -> *mut c_void;
 }
+*/
 
 unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
     unsafe extern "C" fn allocator(
@@ -517,10 +518,10 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
 
         if nsize == 0 {
             (*extra_data).used_memory = new_used_memory;
-            free(ptr as *mut c_void);
+            libc::free(ptr as *mut libc::c_void);
             ptr::null_mut()
         } else {
-            let p = realloc(ptr as *mut c_void, nsize) as *mut c_void;
+            let p = libc::realloc(ptr as *mut libc::c_void, nsize) as *mut c_void;
             if !p.is_null() {
                 // Only commit the new used memory if the allocation was successful.  Probably in
                 // reality, libc::realloc will never fail.
@@ -784,13 +785,15 @@ unsafe fn load_from_std_lib(state: *mut ffi::lua_State, lua_mod: StdLib) {
     if lua_mod.contains(StdLib::TABLE) {
         requiref(state, cstr!("table"), Some(ffi::luaopen_table), 1);
     }
+    /*
+    #[cfg(not(feature = "lua-no-oslib"))]
     if lua_mod.contains(StdLib::IO) {
         requiref(state, cstr!("io"), Some(ffi::luaopen_io), 1);
     }
     #[cfg(not(feature = "lua-no-oslib"))]
     if lua_mod.contains(StdLib::OS) {
         requiref(state, cstr!("os"), Some(ffi::luaopen_os), 1);
-    }
+    } */
     if lua_mod.contains(StdLib::STRING) {
         requiref(state, cstr!("string"), Some(ffi::luaopen_string), 1);
     }
