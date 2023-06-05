@@ -25,7 +25,7 @@ libc = { version = "0.2", default_features = false }
 num-traits = { version = "0.2.14", features = ["libm", "i128"], default_features = false }
 bitflags = { version = "1.0.4" }
 bstr = {version = "0.2", default_features = false }
-rlua-lua51-sys = {path = "./crates/rlua-lua51-sys/"}
+rlua-lua51-sys = {path = "./crates/rlua-lua51-sys/", features = ["lua-no-oslib"]}
 lock_api = {version = "0.4.9", features = ["arc_lock"] }
 
 [dev-dependencies]
