@@ -1,4 +1,5 @@
 extern crate cc;
+extern crate pkg_config;
 
 use std::env;
 use std::path::PathBuf;
@@ -18,6 +19,7 @@ fn main() {
         let mut cc_config = cc::Build::new();
         cc_config.warnings(false);
 
+        /*
         if target_os == Ok("linux".to_string()) {
             cc_config.define("LUA_USE_LINUX", None);
         } else if target_os == Ok("macos".to_string()) {
@@ -26,7 +28,7 @@ fn main() {
             cc_config.define("LUA_USE_POSIX", None);
         } else if target_family == Ok("windows".to_string()) {
             cc_config.define("LUA_USE_WINDOWS", None);
-        }
+        }*/
 
         let mut cc_config_build = cc_config.include(&lua_dir);
 

@@ -1,3 +1,4 @@
+#![no_std]
 use core::mem;
 use core::ffi::{c_char, c_int, c_void};
 use core::ptr;
@@ -5,6 +6,7 @@ use core::ptr;
 #[allow(non_upper_case_globals)]
 #[allow(non_camel_case_types)]
 #[allow(non_snake_case)]
+
 pub mod bindings;
 
 pub const LUA_REGISTRYINDEX: c_int = bindings::LUA_REGISTRYINDEX as c_int;
@@ -221,16 +223,16 @@ pub unsafe fn lua_upvalueindex(index: c_int) -> i32 {
 
 pub unsafe fn lua_register(
     state: *mut lua_State,
-    n: *const ::std::os::raw::c_char,
+    n: *const ::core::ffi::c_char,
     f: lua_CFunction,
 ) {
     lua_pushcfunction(state, f);
     lua_setglobal(state, n);
 }
 
-pub unsafe fn lua_setglobal(state: *mut lua_State, k: *const ::std::os::raw::c_char) {
+pub unsafe fn lua_setglobal(state: *mut lua_State, k: *const ::core::ffi::c_char) {
     lua_setfield(state, LUA_GLOBALSINDEX, k);
 }
-pub unsafe fn lua_getglobal(state: *mut lua_State, k: *const ::std::os::raw::c_char) {
+pub unsafe fn lua_getglobal(state: *mut lua_State, k: *const ::core::ffi::c_char) {
     lua_getfield(state, LUA_GLOBALSINDEX, k);
 }
