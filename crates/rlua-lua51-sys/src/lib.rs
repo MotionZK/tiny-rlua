@@ -1,12 +1,21 @@
 #![no_std]
-use core::mem;
-use core::ffi::{c_char, c_int, c_void};
+#![allow(dead_code)]
+#![allow(non_snake_case)]
+#![allow(unused_variables)]
+#![feature(once_cell)]
+extern crate alloc;
+use alloc::boxed::Box;
+
+use core::cell::LazyCell;
+use core::{mem, isize};
+use core::ffi::{c_char, c_int, c_void, c_double};
+use core::ffi::CStr;
+use core::slice;
 use core::ptr;
 
 #[allow(non_upper_case_globals)]
 #[allow(non_camel_case_types)]
 #[allow(non_snake_case)]
-
 pub mod bindings;
 
 pub const LUA_REGISTRYINDEX: c_int = bindings::LUA_REGISTRYINDEX as c_int;
@@ -20,8 +29,8 @@ pub const LUA_ERRSYNTAX: c_int = bindings::LUA_ERRSYNTAX as c_int;
 pub const LUA_ERRMEM: c_int = bindings::LUA_ERRMEM as c_int;
 pub const LUA_ERRERR: c_int = bindings::LUA_ERRERR as c_int;
 
-pub const LUA_NOREF: c_int = bindings::LUA_NOREF as c_int;
-pub const LUA_REFNIL: c_int = bindings::LUA_REFNIL as c_int;
+//pub const LUA_NOREF: c_int = bindings::LUA_NOREF as c_int;
+//pub const LUA_REFNIL: c_int = bindings::LUA_REFNIL as c_int;
 
 pub const LUA_MULTRET: c_int = bindings::LUA_MULTRET as c_int;
 pub const LUA_IDSIZE: c_int = bindings::LUA_IDSIZE as c_int;
@@ -235,4 +244,126 @@ pub unsafe fn lua_setglobal(state: *mut lua_State, k: *const ::core::ffi::c_char
 }
 pub unsafe fn lua_getglobal(state: *mut lua_State, k: *const ::core::ffi::c_char) {
     lua_getfield(state, LUA_GLOBALSINDEX, k);
+}
+
+use bindings::FILE;
+
+#[no_mangle]
+pub extern "C" fn fprintf(stream: *mut FILE, format: *mut c_char) -> c_int {
+    return 0;
+}
+
+#[no_mangle]
+pub extern "C" fn sprintf(str: *mut c_void, format: *mut c_char) -> c_int {
+    return 0;
+}
+
+#[no_mangle]
+pub extern "C" fn exit() {
+    panic!("exit")
+}
+
+#[no_mangle]
+pub extern "C" fn lua_assert(x: c_int) {
+    panic!("lua_assert");
+}
+
+static mut IO: bindings::FILE = bindings::FILE {
+    unget: 0,
+    flags: 0,
+    // return no-op functions as options like above
+    put: None, 
+    get: None,
+    flush: None,
+};
+
+#[no_mangle]
+pub static mut stderr: LazyCell<*mut bindings::FILE>  = unsafe { LazyCell::new(|| {&mut IO as *mut bindings::FILE }) };
+#[no_mangle]
+pub static mut stdin: LazyCell<*mut Box<bindings::FILE>>  = unsafe { LazyCell::new(|| {&mut Box::new(IO) as *mut Box::<bindings::FILE>}) };
+#[no_mangle]
+pub static mut stdout: LazyCell<*mut Box<bindings::FILE>>  = unsafe { LazyCell::new(|| {&mut Box::new(IO) as *mut Box::<bindings::FILE>}) };
+
+#[no_mangle]
+pub extern "C" fn strtod(s: *const c_char, endptr: *mut *mut c_char) -> c_double {
+    let s = unsafe { CStr::from_ptr(s) };
+    let end = 0;
+    let d = s.to_str().unwrap().parse::<c_double>().unwrap(); 
+    unsafe {
+        *endptr = end as *mut c_char;
+    }
+    d
+}
+
+extern "C" {
+    pub fn memchr(s: *const c_void, c: c_int, n: usize) -> *mut c_void;
+}
+
+#[no_mangle]
+pub extern "C" fn strchr(s: *const c_char, c: c_char) -> *const c_char {
+    fn inner(s: &[c_char], c: c_char) -> Option<&c_char> {
+        let off = s.iter().position(|ch| *ch == c)?;
+        Some(&s[off])
+    }
+    match unsafe { inner(cstr2slice(s), c) } {
+        Some(p) => p,
+        None => ptr::null(),
+    }
+}
+
+unsafe fn cstr2slice<'a>(s: *const c_char) -> &'a [c_char] {
+    slice::from_raw_parts(s, strlen(s))
+}
+
+#[no_mangle]
+pub extern "C" fn strlen(s: *const c_char) -> usize {
+    let mut k = 0;
+    while unsafe { *s.offset(k) } != 0 && k <= 7 {
+        k += 1;
+    }
+    k as usize 
+}
+
+/// freopen
+#[no_mangle]
+pub extern "C" fn freopen(filename: *const c_char, mode: *const char, stream: *mut FILE){
+    panic!("exit")
+}
+
+/// open
+#[no_mangle]
+pub extern "C" fn open(pathname: *const c_char, mode: c_int){
+    panic!("exit")
+}
+
+#[no_mangle]
+pub extern "C" fn close(fd: c_int)  {
+    panic!("exit")
+}
+
+#[no_mangle]
+pub extern "C" fn lseek(
+    fd: c_int,
+    offset: usize,
+    whence: c_int) 
+{
+    panic!("exit")
+}
+
+#[no_mangle]
+pub extern "C" fn write(fd: c_int, buf: *const c_void, count: usize) -> isize {
+    panic!("exit")
+}
+
+#[no_mangle]
+pub extern "C" fn read(fd: c_int, buf: *mut c_void, count: usize) {
+    panic!("exit")
+}
+
+#[no_mangle]
+pub extern "C" fn lua_lock(L: *const lua_State) {
+}
+
+#[no_mangle]
+pub extern "C" fn lua_unlock(L: *const lua_State) {
 }
