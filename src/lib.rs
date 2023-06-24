@@ -38,6 +38,7 @@
 
 // Deny warnings inside doc tests / examples. When this isn't present, rustdoc doesn't show *any*
 // warnings at all.
+#![feature(once_cell)]
 #![cfg_attr(not(feature = "std"), no_std)]
 #![feature(error_in_core)]
 #![feature(core_intrinsics)]
@@ -46,7 +47,7 @@
 #[macro_use]
 mod macros;
 
-extern crate rlua_lua51_sys as ffi;
+pub extern crate rlua_lua51_sys as ffi;
 extern crate alloc;
 
 mod context;

@@ -1,6 +1,7 @@
-use core::alloc::Layout;
+use core::alloc::{GlobalAlloc, Layout};
+use core::sync::atomic::{AtomicUsize, Ordering::SeqCst};
+use core::cell::{UnsafeCell, RefCell, LazyCell};
 use core::any::TypeId;
-use core::cell::RefCell;
 use core::marker::PhantomData;
 use core::ffi::{c_int, c_void};
 use core::ptr;
@@ -10,7 +11,6 @@ use alloc::collections::BTreeMap;
 use alloc::vec::Vec;
 use alloc::boxed::Box;
 use alloc::sync::Arc;
-use alloc::alloc::realloc;
 
 use bitflags::bitflags;
 
@@ -21,7 +21,7 @@ use crate::hook::{hook_proc, Debug, HookTriggers};
 use crate::markers::NoRefUnwindSafe;
 use crate::types::{Callback, Mutex};
 use crate::util::{
-    assert_stack, dostring, init_error_registry, protect_lua_closure, push_globaltable, rawlen,
+    assert_stack, init_error_registry, protect_lua_closure, push_globaltable, rawlen,
     requiref, safe_pcall, safe_xpcall, userdata_destructor,
 };
 
@@ -113,7 +113,7 @@ impl Drop for Lua {
 impl Lua {
     /// Creates a new Lua state and loads standard library without the `debug` library.
     pub fn new() -> Lua {
-        unsafe { create_lua(StdLib::ALL_NO_DEBUG, InitFlags::DEFAULT) }
+        unsafe { create_lua(StdLib::BASE, InitFlags::DEFAULT)}
     }
 
     /// Creates a new Lua state and loads the standard library including the `debug` library.
@@ -483,12 +483,61 @@ pub(crate) unsafe fn extra_data(state: *mut ffi::lua_State) -> *mut ExtraData {
         return extra as *mut ExtraData;
     }
 }
-/*
-extern "C" {
-    fn free(ptr: *mut c_void);
-    fn realloc(ptr: *mut c_void, size: usize) -> *mut c_void;
+
+
+const ARENA_SIZE: usize = 128 * 1024;
+const MAX_SUPPORTED_ALIGN: usize = 4096;
+#[repr(C, align(32))] 
+struct SimpleAllocator {
+    arena: Mutex<UnsafeCell<[u8; ARENA_SIZE]>>,
+    remaining: AtomicUsize, 
 }
-*/
+//#[global_allocator]
+static ALLOCATOR: SimpleAllocator = SimpleAllocator {
+    arena: Mutex::new(UnsafeCell::new([0x55; ARENA_SIZE])),
+    remaining: AtomicUsize::new(ARENA_SIZE),
+};
+
+static LUA_LAYOUT: Mutex<LazyCell<Layout>> = Mutex::new(LazyCell::new(|| Layout::from_size_align(ARENA_SIZE, 32).unwrap()));
+
+unsafe impl Sync for SimpleAllocator {}
+
+unsafe impl GlobalAlloc for SimpleAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        let size = layout.size();
+        let align = layout.align();
+
+        // `Layout` contract forbids making a `Layout` with align=0, or align not power of 2.
+        // So we can safely use a mask to ensure alignment without worrying about UB.
+        let align_mask_to_round_down = !(align - 1);
+
+        if align > MAX_SUPPORTED_ALIGN {
+            return core::ptr::null_mut();
+        }
+
+        let mut allocated = 0;
+        if self
+            .remaining
+            .fetch_update(SeqCst, SeqCst, |mut remaining| {
+                if size > remaining {
+                    return None;
+                }
+                remaining -= size;
+                remaining &= align_mask_to_round_down;
+                allocated = remaining;
+                Some(remaining)
+            })
+            .is_err()
+        {
+            return core::ptr::null_mut();
+        };
+        self.arena.data_ptr().cast::<u8>().add(allocated)  
+    }
+    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {
+        drop(*_ptr);
+    }
+}
+
 
 unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
     unsafe extern "C" fn allocator(
@@ -520,24 +569,28 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
 
         if nsize == 0 {
             (*extra_data).used_memory = new_used_memory;
-            //libc::free(ptr as *mut c_void);
-            drop(ptr);
+            //ffi::free(ptr as *mut c_void);
+            ALLOCATOR.dealloc(ptr as *mut u8, **LUA_LAYOUT.data_ptr());
+            // idiomatic free without access to libc or `free()`
+            //drop(Box::from_raw(ptr as *mut u8));
             ptr::null_mut()
         } else {
-            //let p = libc::realloc(ptr as *mut c_void, nsize) as *mut c_void;
-            let p = realloc(ptr as *mut u8, Layout::new::<u8>(), nsize) as *mut c_void;
+            //let p = ffi::realloc(ptr as *mut c_void, nsize) as *mut c_void;
+            let p = ALLOCATOR.realloc(ptr as *mut u8, **LUA_LAYOUT.data_ptr(), nsize);
+            //let p = ALLOCATOR.realloc(ptr as *mut u8,, nsize) as *mut u8;
+            //let p = realloc(ptr as *mut u8, Layout::new::<u8>(), nsize) as *mut c_void;
             if !p.is_null() {
                 // Only commit the new used memory if the allocation was successful.  Probably in
                 // reality, libc::realloc will never fail.
                 (*extra_data).used_memory = new_used_memory;
             }
-            p
+            p as *mut c_void
         }
     }
 
     let mut extra = Box::new(ExtraData {
         registered_userdata: BTreeMap::new(),
-        registry_unref_list: Arc::new(Mutex::new(Some(Vec::with_capacity(256)))),
+        registry_unref_list: Arc::new(Mutex::new(Some(Vec::new()))),
         ref_thread: ptr::null_mut(),
         // We need 1 extra stack space to move values in and out of the ref stack.
         ref_stack_size: ffi::LUA_MINSTACK - 1,
@@ -548,6 +601,7 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
         hook_callback: None,
     });
 
+
     let state = ffi::lua_newstate(
         Some(allocator),
         &mut *extra as *mut ExtraData as *mut c_void,
@@ -556,8 +610,7 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
     #[cfg(rlua_lua54)]
     ffi::lua_setcstacklimit(state, SAFE_CSTACK_SIZE);
 
-    extra.ref_thread = rlua_expect!(
-        protect_lua_closure(state, 0, 0, |state| {
+    extra.ref_thread = protect_lua_closure(state, 0, 0, |state| {
             load_from_std_lib(state, lua_mod_to_load);
 
             init_error_registry(state, init_flags.contains(InitFlags::PCALL_WRAPPERS));
@@ -596,131 +649,6 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
                 ffi::lua_pop(state, 1);
             }
 
-            // Override dofile, load, and loadfile with versions that won't load
-            // binary files.
-            if init_flags.contains(InitFlags::LOAD_WRAPPERS) {
-                // These are easier to override in Lua.
-                #[cfg(any(rlua_lua53, rlua_lua54))]
-                let wrapload = r#"
-                    do
-                        -- load(chunk [, chunkname [, mode [, env]]])
-                        local real_load = load
-                        load = function(...)
-                            local args = table.pack(...)
-                            args[3] = "t"
-                            if args.n < 3 then args.n = 3 end
-                            return real_load(table.unpack(args))
-                        end
-
-                        -- loadfile ([filename [, mode [, env]]])
-                        local real_loadfile = loadfile
-                        local real_error = error
-                        loadfile = function(...)
-                            local args = table.pack(...)
-                            args[2] = "t"
-                            if args.n < 2 then args.n = 2 end
-                            return real_loadfile(table.unpack(args))
-                        end
-
-                        -- dofile([filename])
-                        local real_dofile = dofile
-                        dofile = function(filename)
-                            -- Note: this is the wrapped loadfile above
-                            local chunk = loadfile(filename)
-                            if chunk then
-                                return chunk()
-                            else
-                                real_error("rlua dofile: attempt to load bytecode")
-                            end
-                        end
-                    end
-                "#;
-                let wrapload = r#"
-                    do
-                        -- load(chunk [, chunkname])
-                        local real_load = load
-                        -- save type() in case user code replaces it
-                        local real_type = type
-                        local real_error = error
-                        load = function(func, chunkname) 
-                            local first_chunk = true
-                            local wrap_func = function()
-                                if not first_chunk then
-                                    return func()
-                                else
-                                    local data = func()
-                                    if data == nil then return nil end
-                                    assert(real_type(data) == "string")
-                                    if data:len() > 0 then
-                                        if data:byte(1) == 27 then
-                                            real_error("rlua load: loading binary chunks is not allowed")
-                                        end
-                                        first_chunk = false
-                                    end
-                                    return data
-                                end
-                            end
-                            return real_load(wrap_func, chunkname)
-                        end
-
-                        -- loadstring(string [, chunkname])
-                        local real_loadstring = loadstring
-                        loadstring = function(s, chunkname)
-                            if type(s) ~= "string" then
-                                real_error("rlua loadstring: string expected.")
-                            elseif s:byte(1) == 27 then
-                                -- This is a binary chunk, so disallow
-                                return nil, "rlua loadstring: loading binary chunks is not allowed"
-                            else
-                                return real_loadstring(s, chunkname)
-                            end
-                        end
-
-                        -- loadfile ([filename])
-                        local real_loadfile = loadfile
-                        local real_io_open = io.open
-                        loadfile = function(filename)
-                            local f, err = real_io_open(filename, "rb")
-                            if not f then
-                                return nil, err
-                            end
-                            local first_chunk = true
-                            local func = function()
-                                return f:read(4096)
-                            end
-                            -- Note: the safe load from above.
-                            return load(func, filename)
-                        end
-
-                        -- dofile([filename])
-                        local real_dofile = dofile
-                        dofile = function(filename)
-                            -- Note: this is the wrapped loadfile above
-                            local chunk = loadfile(filename)
-                            if chunk then
-                                return chunk()
-                            else
-                                real_error("rlua dofile: attempt to load bytecode")
-                            end
-                        end
-                    end
-                "#;
-
-                let result = dostring(state, wrapload);
-                if result != 0 {
-                    //use core::ffi::CStr;
-                    // TODO: not sure how to handle this one after removing luaio
-                    // error message left for easier debugging
-                    let _errmsg = ffi::lua_tostring(state, -1);
-                    /*
-                    eprintln!(
-                        "Internal error running setup code: {:?}",
-                        CStr::from_ptr(errmsg)
-                    );*/
-                }
-                assert_eq!(result, 0);
-            }
-
             if init_flags.contains(InitFlags::REMOVE_LOADLIB) {
                 ffi::lua_getglobal(state, cstr!("package"));
                 let t = ffi::lua_type(state, -1);
@@ -730,8 +658,6 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
                     ffi::lua_setfield(state, -2, cstr!("loadlib"));
 
                     let searchers_name = cstr!("loaders");
-                    #[cfg(any(rlua_lua53, rlua_lua54))]
-                    let searchers_name = cstr!("searchers");
 
                     ffi::lua_getfield(state, -1, searchers_name);
                     debug_assert_eq!(ffi::lua_type(state, -1), ffi::LUA_TTABLE);
@@ -757,18 +683,11 @@ unsafe fn create_lua(lua_mod_to_load: StdLib, init_flags: InitFlags) -> Lua {
             let ref_thread = ffi::lua_newthread(state);
             ffi::luaL_ref(state, ffi::LUA_REGISTRYINDEX);
             ref_thread
-        }),
-        "Error during Lua construction",
-    );
+        }).unwrap();
 
     rlua_debug_assert!(ffi::lua_gettop(state) == 0, "stack leak during creation");
     assert_stack(state, ffi::LUA_MINSTACK as i32);
 
-    #[cfg(any(rlua_lua53, rlua_lua54))]
-    {
-        // Place pointer to ExtraData in the lua_State "extra space"
-        *(ffi::lua_getextraspace(state) as *mut *mut ExtraData) = Box::into_raw(extra);
-    }
     // Prevent extra from being deallocated
     let _ = Box::into_raw(extra);
 
@@ -782,13 +701,11 @@ unsafe fn load_from_std_lib(state: *mut ffi::lua_State, lua_mod: StdLib) {
     if lua_mod.contains(StdLib::BASE) {
         requiref(state, cstr!("_G"), Some(ffi::luaopen_base), 1);
     }
-    #[cfg(any(rlua_lua53, rlua_lua54))]
-    if lua_mod.contains(StdLib::COROUTINE) {
-        requiref(state, cstr!("coroutine"), Some(ffi::luaopen_coroutine), 1);
-    }
+
     if lua_mod.contains(StdLib::TABLE) {
         requiref(state, cstr!("table"), Some(ffi::luaopen_table), 1);
     }
+    
     /*
     #[cfg(not(feature = "lua-no-oslib"))]
     if lua_mod.contains(StdLib::IO) {
@@ -797,14 +714,12 @@ unsafe fn load_from_std_lib(state: *mut ffi::lua_State, lua_mod: StdLib) {
     #[cfg(not(feature = "lua-no-oslib"))]
     if lua_mod.contains(StdLib::OS) {
         requiref(state, cstr!("os"), Some(ffi::luaopen_os), 1);
-    } */
+    }*/ 
+
     if lua_mod.contains(StdLib::STRING) {
         requiref(state, cstr!("string"), Some(ffi::luaopen_string), 1);
     }
-    #[cfg(any(rlua_lua53, rlua_lua54))]
-    if lua_mod.contains(StdLib::UTF8) {
-        requiref(state, cstr!("utf8"), Some(ffi::luaopen_utf8), 1);
-    }
+
     if lua_mod.contains(StdLib::MATH) {
         requiref(state, cstr!("math"), Some(ffi::luaopen_math), 1);
     }
