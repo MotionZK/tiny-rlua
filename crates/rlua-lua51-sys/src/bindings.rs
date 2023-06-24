@@ -2,124 +2,77 @@
 
 pub const __GNUC_VA_LIST: u32 = 1;
 pub const _LIBC_LIMITS_H_: u32 = 1;
-pub const _FEATURES_H: u32 = 1;
-pub const _DEFAULT_SOURCE: u32 = 1;
-pub const __GLIBC_USE_ISOC2X: u32 = 0;
-pub const __USE_ISOC11: u32 = 1;
-pub const __USE_ISOC99: u32 = 1;
-pub const __USE_ISOC95: u32 = 1;
-pub const __USE_POSIX_IMPLICITLY: u32 = 1;
-pub const _POSIX_SOURCE: u32 = 1;
-pub const _POSIX_C_SOURCE: u32 = 200809;
-pub const __USE_POSIX: u32 = 1;
-pub const __USE_POSIX2: u32 = 1;
-pub const __USE_POSIX199309: u32 = 1;
-pub const __USE_POSIX199506: u32 = 1;
-pub const __USE_XOPEN2K: u32 = 1;
-pub const __USE_XOPEN2K8: u32 = 1;
-pub const _ATFILE_SOURCE: u32 = 1;
-pub const __USE_MISC: u32 = 1;
-pub const __USE_ATFILE: u32 = 1;
-pub const __USE_FORTIFY_LEVEL: u32 = 0;
-pub const __GLIBC_USE_DEPRECATED_GETS: u32 = 0;
-pub const __GLIBC_USE_DEPRECATED_SCANF: u32 = 0;
-pub const _STDC_PREDEF_H: u32 = 1;
-pub const __STDC_IEC_559__: u32 = 1;
-pub const __STDC_IEC_559_COMPLEX__: u32 = 1;
-pub const __STDC_ISO_10646__: u32 = 201706;
-pub const __GNU_LIBRARY__: u32 = 6;
-pub const __GLIBC__: u32 = 2;
-pub const __GLIBC_MINOR__: u32 = 31;
-pub const _SYS_CDEFS_H: u32 = 1;
-pub const __glibc_c99_flexarr_available: u32 = 1;
-pub const __WORDSIZE: u32 = 64;
-pub const __WORDSIZE_TIME64_COMPAT32: u32 = 1;
-pub const __SYSCALL_WORDSIZE: u32 = 64;
-pub const __LONG_DOUBLE_USES_FLOAT128: u32 = 0;
-pub const __HAVE_GENERIC_SELECTION: u32 = 1;
-pub const __GLIBC_USE_LIB_EXT2: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_BFP_EXT: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_BFP_EXT_C2X: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_FUNCS_EXT: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_FUNCS_EXT_C2X: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_TYPES_EXT: u32 = 0;
-pub const MB_LEN_MAX: u32 = 16;
-pub const _BITS_POSIX1_LIM_H: u32 = 1;
-pub const _POSIX_AIO_LISTIO_MAX: u32 = 2;
-pub const _POSIX_AIO_MAX: u32 = 1;
-pub const _POSIX_ARG_MAX: u32 = 4096;
-pub const _POSIX_CHILD_MAX: u32 = 25;
-pub const _POSIX_DELAYTIMER_MAX: u32 = 32;
-pub const _POSIX_HOST_NAME_MAX: u32 = 255;
-pub const _POSIX_LINK_MAX: u32 = 8;
-pub const _POSIX_LOGIN_NAME_MAX: u32 = 9;
-pub const _POSIX_MAX_CANON: u32 = 255;
-pub const _POSIX_MAX_INPUT: u32 = 255;
-pub const _POSIX_MQ_OPEN_MAX: u32 = 8;
-pub const _POSIX_MQ_PRIO_MAX: u32 = 32;
-pub const _POSIX_NAME_MAX: u32 = 14;
-pub const _POSIX_NGROUPS_MAX: u32 = 8;
-pub const _POSIX_OPEN_MAX: u32 = 20;
-pub const _POSIX_PATH_MAX: u32 = 256;
-pub const _POSIX_PIPE_BUF: u32 = 512;
-pub const _POSIX_RE_DUP_MAX: u32 = 255;
-pub const _POSIX_RTSIG_MAX: u32 = 8;
-pub const _POSIX_SEM_NSEMS_MAX: u32 = 256;
-pub const _POSIX_SEM_VALUE_MAX: u32 = 32767;
-pub const _POSIX_SIGQUEUE_MAX: u32 = 32;
-pub const _POSIX_SSIZE_MAX: u32 = 32767;
-pub const _POSIX_STREAM_MAX: u32 = 8;
-pub const _POSIX_SYMLINK_MAX: u32 = 255;
-pub const _POSIX_SYMLOOP_MAX: u32 = 8;
-pub const _POSIX_TIMER_MAX: u32 = 32;
-pub const _POSIX_TTY_NAME_MAX: u32 = 9;
-pub const _POSIX_TZNAME_MAX: u32 = 6;
-pub const _POSIX_CLOCKRES_MIN: u32 = 20000000;
-pub const NR_OPEN: u32 = 1024;
-pub const NGROUPS_MAX: u32 = 65536;
-pub const ARG_MAX: u32 = 131072;
-pub const LINK_MAX: u32 = 127;
+pub const _MB_LEN_MAX: u32 = 1;
+pub const _NEWLIB_MINOR__: u32 = 1;
+pub const _NEWLIB_VERSION: &[u8; 6usize] = b"4.1.0\0";
+pub const _NEWLIB__: u32 = 4;
+pub const _PICOLIBC_MINOR__: u32 = 7;
+pub const _PICOLIBC_VERSION: &[u8; 6usize] = b"1.7.4\0";
+pub const _PICOLIBC__: u32 = 1;
+pub const __NEWLIB_PATCHLEVEL__: u32 = 0;
+pub const __PICOLIBC_PATCHLEVEL__: u32 = 4;
+pub const __ATFILE_VISIBLE: u32 = 0;
+pub const __BSD_VISIBLE: u32 = 0;
+pub const __GNU_VISIBLE: u32 = 0;
+pub const __ISO_C_VISIBLE: u32 = 1990;
+pub const __LARGEFILE_VISIBLE: u32 = 0;
+pub const __MISC_VISIBLE: u32 = 0;
+pub const __POSIX_VISIBLE: u32 = 0;
+pub const __SVID_VISIBLE: u32 = 0;
+pub const __XSI_VISIBLE: u32 = 0;
+pub const __SSP_FORTIFY_LEVEL: u32 = 0;
+pub const __have_longlong64: u32 = 1;
+pub const __have_long32: u32 = 1;
+pub const ___int8_t_defined: u32 = 1;
+pub const ___int16_t_defined: u32 = 1;
+pub const ___int32_t_defined: u32 = 1;
+pub const ___int64_t_defined: u32 = 1;
+pub const ___int_least8_t_defined: u32 = 1;
+pub const ___int_least16_t_defined: u32 = 1;
+pub const ___int_least32_t_defined: u32 = 1;
+pub const ___int_least64_t_defined: u32 = 1;
+pub const __GNUCLIKE_ASM: u32 = 3;
+pub const __GNUCLIKE___TYPEOF: u32 = 1;
+pub const __GNUCLIKE___OFFSETOF: u32 = 1;
+pub const __GNUCLIKE___SECTION: u32 = 1;
+pub const __GNUCLIKE_CTOR_SECTION_HANDLING: u32 = 1;
+pub const __GNUCLIKE_BUILTIN_CONSTANT_P: u32 = 1;
+pub const __GNUCLIKE_BUILTIN_VARARGS: u32 = 1;
+pub const __GNUCLIKE_BUILTIN_STDARG: u32 = 1;
+pub const __GNUCLIKE_BUILTIN_VAALIST: u32 = 1;
+pub const __GNUC_VA_LIST_COMPATIBILITY: u32 = 1;
+pub const __GNUCLIKE_BUILTIN_NEXT_ARG: u32 = 1;
+pub const __GNUCLIKE_BUILTIN_MEMCPY: u32 = 1;
+pub const __CC_SUPPORTS_INLINE: u32 = 1;
+pub const __CC_SUPPORTS___INLINE: u32 = 1;
+pub const __CC_SUPPORTS___INLINE__: u32 = 1;
+pub const __CC_SUPPORTS___FUNC__: u32 = 1;
+pub const __CC_SUPPORTS_WARNING: u32 = 1;
+pub const __CC_SUPPORTS_VARADIC_XXX: u32 = 1;
+pub const __CC_SUPPORTS_DYNAMIC_ARRAY_INIT: u32 = 1;
+pub const ARG_MAX: u32 = 65536;
+pub const CHILD_MAX: u32 = 40;
+pub const LINK_MAX: u32 = 32767;
 pub const MAX_CANON: u32 = 255;
 pub const MAX_INPUT: u32 = 255;
 pub const NAME_MAX: u32 = 255;
-pub const PATH_MAX: u32 = 4096;
-pub const PIPE_BUF: u32 = 4096;
-pub const XATTR_NAME_MAX: u32 = 255;
-pub const XATTR_SIZE_MAX: u32 = 65536;
-pub const XATTR_LIST_MAX: u32 = 65536;
-pub const RTSIG_MAX: u32 = 32;
-pub const _POSIX_THREAD_KEYS_MAX: u32 = 128;
-pub const PTHREAD_KEYS_MAX: u32 = 1024;
-pub const _POSIX_THREAD_DESTRUCTOR_ITERATIONS: u32 = 4;
-pub const PTHREAD_DESTRUCTOR_ITERATIONS: u32 = 4;
-pub const _POSIX_THREAD_THREADS_MAX: u32 = 64;
-pub const AIO_PRIO_DELTA_MAX: u32 = 20;
-pub const PTHREAD_STACK_MIN: u32 = 16384;
-pub const DELAYTIMER_MAX: u32 = 2147483647;
-pub const TTY_NAME_MAX: u32 = 32;
-pub const LOGIN_NAME_MAX: u32 = 256;
-pub const HOST_NAME_MAX: u32 = 64;
-pub const MQ_PRIO_MAX: u32 = 32768;
-pub const SEM_VALUE_MAX: u32 = 2147483647;
-pub const _BITS_POSIX2_LIM_H: u32 = 1;
-pub const _POSIX2_BC_BASE_MAX: u32 = 99;
-pub const _POSIX2_BC_DIM_MAX: u32 = 2048;
-pub const _POSIX2_BC_SCALE_MAX: u32 = 99;
-pub const _POSIX2_BC_STRING_MAX: u32 = 1000;
-pub const _POSIX2_COLL_WEIGHTS_MAX: u32 = 2;
-pub const _POSIX2_EXPR_NEST_MAX: u32 = 32;
-pub const _POSIX2_LINE_MAX: u32 = 2048;
-pub const _POSIX2_RE_DUP_MAX: u32 = 255;
-pub const _POSIX2_CHARCLASS_NAME_MAX: u32 = 14;
+pub const NGROUPS_MAX: u32 = 16;
+pub const OPEN_MAX: u32 = 64;
+pub const PATH_MAX: u32 = 1024;
+pub const PIPE_BUF: u32 = 512;
+pub const IOV_MAX: u32 = 1024;
 pub const BC_BASE_MAX: u32 = 99;
 pub const BC_DIM_MAX: u32 = 2048;
 pub const BC_SCALE_MAX: u32 = 99;
 pub const BC_STRING_MAX: u32 = 1000;
-pub const COLL_WEIGHTS_MAX: u32 = 255;
+pub const COLL_WEIGHTS_MAX: u32 = 0;
 pub const EXPR_NEST_MAX: u32 = 32;
 pub const LINE_MAX: u32 = 2048;
-pub const CHARCLASS_NAME_MAX: u32 = 2048;
-pub const RE_DUP_MAX: u32 = 32767;
+pub const RE_DUP_MAX: u32 = 255;
+pub const MB_LEN_MAX: u32 = 1;
+pub const NL_ARGMAX: u32 = 32;
+pub const CHAR_MIN: u32 = 0;
+pub const _POSIX2_RE_DUP_MAX: u32 = 255;
 pub const LUA_PATH: &[u8; 9usize] = b"LUA_PATH\0";
 pub const LUA_CPATH: &[u8; 10usize] = b"LUA_CPATH\0";
 pub const LUA_INIT: &[u8; 9usize] = b"LUA_INIT\0";
@@ -202,89 +155,81 @@ pub const LUA_STRLIBNAME: &[u8; 7usize] = b"string\0";
 pub const LUA_MATHLIBNAME: &[u8; 5usize] = b"math\0";
 pub const LUA_DBLIBNAME: &[u8; 6usize] = b"debug\0";
 pub const LUA_LOADLIBNAME: &[u8; 8usize] = b"package\0";
-pub const _STDIO_H: u32 = 1;
-pub const _BITS_TYPES_H: u32 = 1;
-pub const __TIMESIZE: u32 = 64;
-pub const _BITS_TYPESIZES_H: u32 = 1;
-pub const __OFF_T_MATCHES_OFF64_T: u32 = 1;
-pub const __INO_T_MATCHES_INO64_T: u32 = 1;
-pub const __RLIM_T_MATCHES_RLIM64_T: u32 = 1;
-pub const __STATFS_MATCHES_STATFS64: u32 = 1;
-pub const __FD_SETSIZE: u32 = 1024;
-pub const _BITS_TIME64_H: u32 = 1;
-pub const _____fpos_t_defined: u32 = 1;
-pub const ____mbstate_t_defined: u32 = 1;
-pub const _____fpos64_t_defined: u32 = 1;
-pub const ____FILE_defined: u32 = 1;
-pub const __FILE_defined: u32 = 1;
-pub const __struct_FILE_defined: u32 = 1;
-pub const _IO_EOF_SEEN: u32 = 16;
-pub const _IO_ERR_SEEN: u32 = 32;
-pub const _IO_USER_LOCK: u32 = 32768;
-pub const _IOFBF: u32 = 0;
-pub const _IOLBF: u32 = 1;
-pub const _IONBF: u32 = 2;
-pub const BUFSIZ: u32 = 8192;
+pub const _STDIO_H_: u32 = 1;
+pub const __OBSOLETE_MATH_DEFAULT_FLOAT: u32 = 1;
+pub const __OBSOLETE_MATH_DEFAULT_DOUBLE: u32 = 0;
+pub const __OBSOLETE_MATH_DEFAULT: u32 = 1;
+pub const __OBSOLETE_MATH: u32 = 1;
+pub const __OBSOLETE_MATH_FLOAT: u32 = 1;
+pub const __OBSOLETE_MATH_DOUBLE: u32 = 0;
+pub const __RAND_MAX: u32 = 2147483647;
+pub const __int20: u32 = 2;
+pub const __int20__: u32 = 2;
+pub const __INT8: &[u8; 3usize] = b"hh\0";
+pub const __INT16: &[u8; 2usize] = b"h\0";
+pub const __INT64: &[u8; 3usize] = b"ll\0";
+pub const __FAST8: &[u8; 3usize] = b"hh\0";
+pub const __FAST16: &[u8; 2usize] = b"h\0";
+pub const __FAST64: &[u8; 3usize] = b"ll\0";
+pub const __LEAST8: &[u8; 3usize] = b"hh\0";
+pub const __LEAST16: &[u8; 2usize] = b"h\0";
+pub const __LEAST64: &[u8; 3usize] = b"ll\0";
+pub const __int8_t_defined: u32 = 1;
+pub const __int16_t_defined: u32 = 1;
+pub const __int32_t_defined: u32 = 1;
+pub const __int64_t_defined: u32 = 1;
+pub const __int_least8_t_defined: u32 = 1;
+pub const __int_least16_t_defined: u32 = 1;
+pub const __int_least32_t_defined: u32 = 1;
+pub const __int_least64_t_defined: u32 = 1;
+pub const __int_fast8_t_defined: u32 = 1;
+pub const __int_fast16_t_defined: u32 = 1;
+pub const __int_fast32_t_defined: u32 = 1;
+pub const __int_fast64_t_defined: u32 = 1;
+pub const WINT_MIN: u32 = 0;
+pub const __PICOLIBC_UNGETC_SIZE: u32 = 4;
+pub const __SRD: u32 = 1;
+pub const __SWR: u32 = 2;
+pub const __SERR: u32 = 4;
+pub const __SEOF: u32 = 8;
+pub const __SCLOSE: u32 = 16;
 pub const EOF: i32 = -1;
+pub const _FDEV_SETUP_READ: u32 = 1;
+pub const _FDEV_SETUP_WRITE: u32 = 2;
+pub const _FDEV_SETUP_RW: u32 = 3;
+pub const _FDEV_ERR: i32 = -1;
+pub const _FDEV_EOF: i32 = -2;
+pub const BUFSIZ: u32 = 512;
+pub const _IONBF: u32 = 0;
 pub const SEEK_SET: u32 = 0;
 pub const SEEK_CUR: u32 = 1;
 pub const SEEK_END: u32 = 2;
-pub const P_tmpdir: &[u8; 5usize] = b"/tmp\0";
-pub const _BITS_STDIO_LIM_H: u32 = 1;
-pub const L_tmpnam: u32 = 20;
-pub const TMP_MAX: u32 = 238328;
-pub const FILENAME_MAX: u32 = 4096;
-pub const L_ctermid: u32 = 9;
-pub const FOPEN_MAX: u32 = 16;
 pub const LUA_ERRFILE: u32 = 6;
 pub const LUA_NOREF: i32 = -2;
 pub const LUA_REFNIL: i32 = -1;
 pub type va_list = __builtin_va_list;
 pub type __gnuc_va_list = __builtin_va_list;
 pub type wchar_t = ::core::ffi::c_int;
-#[repr(C)]
-#[repr(align(16))]
-#[derive(Debug, Copy, Clone)]
-pub struct max_align_t {
-    pub __clang_max_align_nonce1: ::core::ffi::c_longlong,
-    pub __bindgen_padding_0: u64,
-    pub __clang_max_align_nonce2: u128,
-}
-#[test]
-fn bindgen_test_layout_max_align_t() {
-    const UNINIT: ::core::mem::MaybeUninit<max_align_t> = ::core::mem::MaybeUninit::uninit();
-    let ptr = UNINIT.as_ptr();
-    assert_eq!(
-        ::core::mem::size_of::<max_align_t>(),
-        32usize,
-        concat!("Size of: ", stringify!(max_align_t))
-    );
-    assert_eq!(
-        ::core::mem::align_of::<max_align_t>(),
-        16usize,
-        concat!("Alignment of ", stringify!(max_align_t))
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__clang_max_align_nonce1) as usize - ptr as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(max_align_t),
-            "::",
-            stringify!(__clang_max_align_nonce1)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__clang_max_align_nonce2) as usize - ptr as usize },
-        16usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(max_align_t),
-            "::",
-            stringify!(__clang_max_align_nonce2)
-        )
-    );
-}
+pub type __int8_t = ::core::ffi::c_schar;
+pub type __uint8_t = ::core::ffi::c_uchar;
+pub type __int16_t = ::core::ffi::c_short;
+pub type __uint16_t = ::core::ffi::c_ushort;
+pub type __int32_t = ::core::ffi::c_int;
+pub type __uint32_t = ::core::ffi::c_uint;
+pub type __int64_t = ::core::ffi::c_longlong;
+pub type __uint64_t = ::core::ffi::c_ulonglong;
+pub type __int_least8_t = ::core::ffi::c_schar;
+pub type __uint_least8_t = ::core::ffi::c_uchar;
+pub type __int_least16_t = ::core::ffi::c_short;
+pub type __uint_least16_t = ::core::ffi::c_ushort;
+pub type __int_least32_t = ::core::ffi::c_int;
+pub type __uint_least32_t = ::core::ffi::c_uint;
+pub type __int_least64_t = ::core::ffi::c_longlong;
+pub type __uint_least64_t = ::core::ffi::c_ulonglong;
+pub type __intmax_t = ::core::ffi::c_longlong;
+pub type __uintmax_t = ::core::ffi::c_ulonglong;
+pub type __intptr_t = ::core::ffi::c_int;
+pub type __uintptr_t = ::core::ffi::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct lua_State {
@@ -442,7 +387,7 @@ extern "C" {
     pub fn lua_pushvfstring(
         L: *mut lua_State,
         fmt: *const ::core::ffi::c_char,
-        argp: *mut __va_list_tag,
+        argp: va_list,
     ) -> *const ::core::ffi::c_char;
 }
 extern "C" {
@@ -655,12 +600,12 @@ fn bindgen_test_layout_lua_Debug() {
     let ptr = UNINIT.as_ptr();
     assert_eq!(
         ::core::mem::size_of::<lua_Debug>(),
-        120usize,
+        100usize,
         concat!("Size of: ", stringify!(lua_Debug))
     );
     assert_eq!(
         ::core::mem::align_of::<lua_Debug>(),
-        8usize,
+        4usize,
         concat!("Alignment of ", stringify!(lua_Debug))
     );
     assert_eq!(
@@ -675,7 +620,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).name) as usize - ptr as usize },
-        8usize,
+        4usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -685,7 +630,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).namewhat) as usize - ptr as usize },
-        16usize,
+        8usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -695,7 +640,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).what) as usize - ptr as usize },
-        24usize,
+        12usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -705,7 +650,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).source) as usize - ptr as usize },
-        32usize,
+        16usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -715,7 +660,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).currentline) as usize - ptr as usize },
-        40usize,
+        20usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -725,7 +670,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).nups) as usize - ptr as usize },
-        44usize,
+        24usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -735,7 +680,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).linedefined) as usize - ptr as usize },
-        48usize,
+        28usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -745,7 +690,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).lastlinedefined) as usize - ptr as usize },
-        52usize,
+        32usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -755,7 +700,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).short_src) as usize - ptr as usize },
-        56usize,
+        36usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -765,7 +710,7 @@ fn bindgen_test_layout_lua_Debug() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).i_ci) as usize - ptr as usize },
-        116usize,
+        96usize,
         concat!(
             "Offset of field: ",
             stringify!(lua_Debug),
@@ -801,130 +746,153 @@ extern "C" {
 extern "C" {
     pub fn luaL_openlibs(L: *mut lua_State);
 }
-pub type __u_char = ::core::ffi::c_uchar;
-pub type __u_short = ::core::ffi::c_ushort;
-pub type __u_int = ::core::ffi::c_uint;
-pub type __u_long = ::core::ffi::c_ulong;
-pub type __int8_t = ::core::ffi::c_schar;
-pub type __uint8_t = ::core::ffi::c_uchar;
-pub type __int16_t = ::core::ffi::c_short;
-pub type __uint16_t = ::core::ffi::c_ushort;
-pub type __int32_t = ::core::ffi::c_int;
-pub type __uint32_t = ::core::ffi::c_uint;
-pub type __int64_t = ::core::ffi::c_long;
-pub type __uint64_t = ::core::ffi::c_ulong;
-pub type __int_least8_t = __int8_t;
-pub type __uint_least8_t = __uint8_t;
-pub type __int_least16_t = __int16_t;
-pub type __uint_least16_t = __uint16_t;
-pub type __int_least32_t = __int32_t;
-pub type __uint_least32_t = __uint32_t;
-pub type __int_least64_t = __int64_t;
-pub type __uint_least64_t = __uint64_t;
-pub type __quad_t = ::core::ffi::c_long;
-pub type __u_quad_t = ::core::ffi::c_ulong;
-pub type __intmax_t = ::core::ffi::c_long;
-pub type __uintmax_t = ::core::ffi::c_ulong;
-pub type __dev_t = ::core::ffi::c_ulong;
-pub type __uid_t = ::core::ffi::c_uint;
-pub type __gid_t = ::core::ffi::c_uint;
-pub type __ino_t = ::core::ffi::c_ulong;
-pub type __ino64_t = ::core::ffi::c_ulong;
-pub type __mode_t = ::core::ffi::c_uint;
-pub type __nlink_t = ::core::ffi::c_ulong;
-pub type __off_t = ::core::ffi::c_long;
-pub type __off64_t = ::core::ffi::c_long;
-pub type __pid_t = ::core::ffi::c_int;
+pub type intmax_t = __intmax_t;
+pub type uintmax_t = __uintmax_t;
+pub type int_least8_t = __int_least8_t;
+pub type uint_least8_t = __uint_least8_t;
+pub type int_least16_t = __int_least16_t;
+pub type uint_least16_t = __uint_least16_t;
+pub type int_least32_t = __int_least32_t;
+pub type uint_least32_t = __uint_least32_t;
+pub type int_least64_t = __int_least64_t;
+pub type uint_least64_t = __uint_least64_t;
+pub type int_fast8_t = ::core::ffi::c_schar;
+pub type uint_fast8_t = ::core::ffi::c_uchar;
+pub type int_fast16_t = ::core::ffi::c_short;
+pub type uint_fast16_t = ::core::ffi::c_ushort;
+pub type int_fast32_t = ::core::ffi::c_int;
+pub type uint_fast32_t = ::core::ffi::c_uint;
+pub type int_fast64_t = ::core::ffi::c_longlong;
+pub type uint_fast64_t = ::core::ffi::c_ulonglong;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct __fsid_t {
-    pub __val: [::core::ffi::c_int; 2usize],
+pub struct imaxdiv_t {
+    pub quot: intmax_t,
+    pub rem: intmax_t,
 }
 #[test]
-fn bindgen_test_layout___fsid_t() {
-    const UNINIT: ::core::mem::MaybeUninit<__fsid_t> = ::core::mem::MaybeUninit::uninit();
+fn bindgen_test_layout_imaxdiv_t() {
+    const UNINIT: ::core::mem::MaybeUninit<imaxdiv_t> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::core::mem::size_of::<__fsid_t>(),
+        ::core::mem::size_of::<imaxdiv_t>(),
+        16usize,
+        concat!("Size of: ", stringify!(imaxdiv_t))
+    );
+    assert_eq!(
+        ::core::mem::align_of::<imaxdiv_t>(),
         8usize,
-        concat!("Size of: ", stringify!(__fsid_t))
+        concat!("Alignment of ", stringify!(imaxdiv_t))
     );
     assert_eq!(
-        ::core::mem::align_of::<__fsid_t>(),
-        4usize,
-        concat!("Alignment of ", stringify!(__fsid_t))
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__val) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).quot) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(__fsid_t),
+            stringify!(imaxdiv_t),
             "::",
-            stringify!(__val)
+            stringify!(quot)
+        )
+    );
+    assert_eq!(
+        unsafe { ::core::ptr::addr_of!((*ptr).rem) as usize - ptr as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(imaxdiv_t),
+            "::",
+            stringify!(rem)
         )
     );
 }
-pub type __clock_t = ::core::ffi::c_long;
-pub type __rlim_t = ::core::ffi::c_ulong;
-pub type __rlim64_t = ::core::ffi::c_ulong;
-pub type __id_t = ::core::ffi::c_uint;
-pub type __time_t = ::core::ffi::c_long;
-pub type __useconds_t = ::core::ffi::c_uint;
-pub type __suseconds_t = ::core::ffi::c_long;
-pub type __daddr_t = ::core::ffi::c_int;
-pub type __key_t = ::core::ffi::c_int;
-pub type __clockid_t = ::core::ffi::c_int;
-pub type __timer_t = *mut ::core::ffi::c_void;
-pub type __blksize_t = ::core::ffi::c_long;
+extern "C" {
+    pub fn imaxabs(arg1: intmax_t) -> intmax_t;
+}
+extern "C" {
+    pub fn imaxdiv(__numer: intmax_t, __denomer: intmax_t) -> imaxdiv_t;
+}
+extern "C" {
+    pub fn strtoimax(
+        arg1: *const ::core::ffi::c_char,
+        arg2: *mut *mut ::core::ffi::c_char,
+        arg3: ::core::ffi::c_int,
+    ) -> intmax_t;
+}
+extern "C" {
+    pub fn strtoumax(
+        arg1: *const ::core::ffi::c_char,
+        arg2: *mut *mut ::core::ffi::c_char,
+        arg3: ::core::ffi::c_int,
+    ) -> uintmax_t;
+}
+extern "C" {
+    pub fn wcstoimax(
+        arg1: *const wchar_t,
+        arg2: *mut *mut wchar_t,
+        arg3: ::core::ffi::c_int,
+    ) -> intmax_t;
+}
+extern "C" {
+    pub fn wcstoumax(
+        arg1: *const wchar_t,
+        arg2: *mut *mut wchar_t,
+        arg3: ::core::ffi::c_int,
+    ) -> uintmax_t;
+}
+pub type wint_t = ::core::ffi::c_uint;
 pub type __blkcnt_t = ::core::ffi::c_long;
-pub type __blkcnt64_t = ::core::ffi::c_long;
-pub type __fsblkcnt_t = ::core::ffi::c_ulong;
-pub type __fsblkcnt64_t = ::core::ffi::c_ulong;
-pub type __fsfilcnt_t = ::core::ffi::c_ulong;
-pub type __fsfilcnt64_t = ::core::ffi::c_ulong;
-pub type __fsword_t = ::core::ffi::c_long;
-pub type __ssize_t = ::core::ffi::c_long;
-pub type __syscall_slong_t = ::core::ffi::c_long;
-pub type __syscall_ulong_t = ::core::ffi::c_ulong;
-pub type __loff_t = __off64_t;
-pub type __caddr_t = *mut ::core::ffi::c_char;
-pub type __intptr_t = ::core::ffi::c_long;
-pub type __socklen_t = ::core::ffi::c_uint;
-pub type __sig_atomic_t = ::core::ffi::c_int;
+pub type __blksize_t = ::core::ffi::c_long;
+pub type __fsblkcnt_t = __uint64_t;
+pub type __fsfilcnt_t = __uint32_t;
+pub type _off_t = ::core::ffi::c_long;
+pub type __pid_t = ::core::ffi::c_int;
+pub type __dev_t = ::core::ffi::c_short;
+pub type __uid_t = ::core::ffi::c_ushort;
+pub type __gid_t = ::core::ffi::c_ushort;
+pub type __id_t = __uint32_t;
+pub type __ino_t = ::core::ffi::c_ushort;
+pub type __mode_t = __uint32_t;
+pub type _off64_t = ::core::ffi::c_longlong;
+pub type __off_t = _off_t;
+pub type __loff_t = _off64_t;
+pub type __key_t = ::core::ffi::c_long;
+pub type _fpos_t = ::core::ffi::c_long;
+pub type __size_t = ::core::ffi::c_uint;
+pub type _ssize_t = ::core::ffi::c_int;
+pub type __ssize_t = _ssize_t;
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct __mbstate_t {
+pub struct _mbstate_t {
     pub __count: ::core::ffi::c_int,
-    pub __value: __mbstate_t__bindgen_ty_1,
+    pub __value: _mbstate_t__bindgen_ty_1,
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub union __mbstate_t__bindgen_ty_1 {
-    pub __wch: ::core::ffi::c_uint,
-    pub __wchb: [::core::ffi::c_char; 4usize],
+pub union _mbstate_t__bindgen_ty_1 {
+    pub __wch: wint_t,
+    pub __wchb: [::core::ffi::c_uchar; 4usize],
 }
 #[test]
-fn bindgen_test_layout___mbstate_t__bindgen_ty_1() {
-    const UNINIT: ::core::mem::MaybeUninit<__mbstate_t__bindgen_ty_1> =
+fn bindgen_test_layout__mbstate_t__bindgen_ty_1() {
+    const UNINIT: ::core::mem::MaybeUninit<_mbstate_t__bindgen_ty_1> =
         ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::core::mem::size_of::<__mbstate_t__bindgen_ty_1>(),
+        ::core::mem::size_of::<_mbstate_t__bindgen_ty_1>(),
         4usize,
-        concat!("Size of: ", stringify!(__mbstate_t__bindgen_ty_1))
+        concat!("Size of: ", stringify!(_mbstate_t__bindgen_ty_1))
     );
     assert_eq!(
-        ::core::mem::align_of::<__mbstate_t__bindgen_ty_1>(),
+        ::core::mem::align_of::<_mbstate_t__bindgen_ty_1>(),
         4usize,
-        concat!("Alignment of ", stringify!(__mbstate_t__bindgen_ty_1))
+        concat!("Alignment of ", stringify!(_mbstate_t__bindgen_ty_1))
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).__wch) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(__mbstate_t__bindgen_ty_1),
+            stringify!(_mbstate_t__bindgen_ty_1),
             "::",
             stringify!(__wch)
         )
@@ -934,32 +902,32 @@ fn bindgen_test_layout___mbstate_t__bindgen_ty_1() {
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(__mbstate_t__bindgen_ty_1),
+            stringify!(_mbstate_t__bindgen_ty_1),
             "::",
             stringify!(__wchb)
         )
     );
 }
 #[test]
-fn bindgen_test_layout___mbstate_t() {
-    const UNINIT: ::core::mem::MaybeUninit<__mbstate_t> = ::core::mem::MaybeUninit::uninit();
+fn bindgen_test_layout__mbstate_t() {
+    const UNINIT: ::core::mem::MaybeUninit<_mbstate_t> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::core::mem::size_of::<__mbstate_t>(),
+        ::core::mem::size_of::<_mbstate_t>(),
         8usize,
-        concat!("Size of: ", stringify!(__mbstate_t))
+        concat!("Size of: ", stringify!(_mbstate_t))
     );
     assert_eq!(
-        ::core::mem::align_of::<__mbstate_t>(),
+        ::core::mem::align_of::<_mbstate_t>(),
         4usize,
-        concat!("Alignment of ", stringify!(__mbstate_t))
+        concat!("Alignment of ", stringify!(_mbstate_t))
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).__count) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(__mbstate_t),
+            stringify!(_mbstate_t),
             "::",
             stringify!(__count)
         )
@@ -969,716 +937,182 @@ fn bindgen_test_layout___mbstate_t() {
         4usize,
         concat!(
             "Offset of field: ",
-            stringify!(__mbstate_t),
+            stringify!(_mbstate_t),
             "::",
             stringify!(__value)
         )
     );
 }
+pub type _iconv_t = *mut ::core::ffi::c_void;
+pub type __clock_t = ::core::ffi::c_ulong;
+pub type __time_t = __int_least64_t;
+pub type __clockid_t = ::core::ffi::c_ulong;
+pub type __timer_t = ::core::ffi::c_ulong;
+pub type __sa_family_t = __uint8_t;
+pub type __socklen_t = __uint32_t;
+pub type __nl_item = ::core::ffi::c_int;
+pub type __nlink_t = ::core::ffi::c_ushort;
+pub type __suseconds_t = ::core::ffi::c_long;
+pub type __useconds_t = ::core::ffi::c_ulong;
+pub type __ungetc_t = u32;
 #[repr(C)]
-#[derive(Copy, Clone)]
-pub struct _G_fpos_t {
-    pub __pos: __off_t,
-    pub __state: __mbstate_t,
+#[derive(Debug, Copy, Clone)]
+pub struct __file {
+    pub unget: __ungetc_t,
+    pub flags: u8,
+    pub put: ::core::option::Option<
+        unsafe extern "C" fn(arg1: ::core::ffi::c_char, arg2: *mut __file) -> ::core::ffi::c_int,
+    >,
+    pub get: ::core::option::Option<unsafe extern "C" fn(arg1: *mut __file) -> ::core::ffi::c_int>,
+    pub flush:
+        ::core::option::Option<unsafe extern "C" fn(arg1: *mut __file) -> ::core::ffi::c_int>,
 }
 #[test]
-fn bindgen_test_layout__G_fpos_t() {
-    const UNINIT: ::core::mem::MaybeUninit<_G_fpos_t> = ::core::mem::MaybeUninit::uninit();
+fn bindgen_test_layout___file() {
+    const UNINIT: ::core::mem::MaybeUninit<__file> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::core::mem::size_of::<_G_fpos_t>(),
-        16usize,
-        concat!("Size of: ", stringify!(_G_fpos_t))
+        ::core::mem::size_of::<__file>(),
+        20usize,
+        concat!("Size of: ", stringify!(__file))
     );
     assert_eq!(
-        ::core::mem::align_of::<_G_fpos_t>(),
-        8usize,
-        concat!("Alignment of ", stringify!(_G_fpos_t))
+        ::core::mem::align_of::<__file>(),
+        4usize,
+        concat!("Alignment of ", stringify!(__file))
     );
     assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__pos) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).unget) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(_G_fpos_t),
+            stringify!(__file),
             "::",
-            stringify!(__pos)
+            stringify!(unget)
         )
     );
     assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__state) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).flags) as usize - ptr as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__file),
+            "::",
+            stringify!(flags)
+        )
+    );
+    assert_eq!(
+        unsafe { ::core::ptr::addr_of!((*ptr).put) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
-            stringify!(_G_fpos_t),
+            stringify!(__file),
             "::",
-            stringify!(__state)
+            stringify!(put)
         )
     );
-}
-pub type __fpos_t = _G_fpos_t;
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct _G_fpos64_t {
-    pub __pos: __off64_t,
-    pub __state: __mbstate_t,
-}
-#[test]
-fn bindgen_test_layout__G_fpos64_t() {
-    const UNINIT: ::core::mem::MaybeUninit<_G_fpos64_t> = ::core::mem::MaybeUninit::uninit();
-    let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::core::mem::size_of::<_G_fpos64_t>(),
-        16usize,
-        concat!("Size of: ", stringify!(_G_fpos64_t))
-    );
-    assert_eq!(
-        ::core::mem::align_of::<_G_fpos64_t>(),
-        8usize,
-        concat!("Alignment of ", stringify!(_G_fpos64_t))
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__pos) as usize - ptr as usize },
-        0usize,
+        unsafe { ::core::ptr::addr_of!((*ptr).get) as usize - ptr as usize },
+        12usize,
         concat!(
             "Offset of field: ",
-            stringify!(_G_fpos64_t),
+            stringify!(__file),
             "::",
-            stringify!(__pos)
+            stringify!(get)
         )
     );
     assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__state) as usize - ptr as usize },
-        8usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_G_fpos64_t),
-            "::",
-            stringify!(__state)
-        )
-    );
-}
-pub type __fpos64_t = _G_fpos64_t;
-pub type __FILE = _IO_FILE;
-pub type FILE = _IO_FILE;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _IO_marker {
-    _unused: [u8; 0],
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _IO_codecvt {
-    _unused: [u8; 0],
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _IO_wide_data {
-    _unused: [u8; 0],
-}
-pub type _IO_lock_t = ::core::ffi::c_void;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _IO_FILE {
-    pub _flags: ::core::ffi::c_int,
-    pub _IO_read_ptr: *mut ::core::ffi::c_char,
-    pub _IO_read_end: *mut ::core::ffi::c_char,
-    pub _IO_read_base: *mut ::core::ffi::c_char,
-    pub _IO_write_base: *mut ::core::ffi::c_char,
-    pub _IO_write_ptr: *mut ::core::ffi::c_char,
-    pub _IO_write_end: *mut ::core::ffi::c_char,
-    pub _IO_buf_base: *mut ::core::ffi::c_char,
-    pub _IO_buf_end: *mut ::core::ffi::c_char,
-    pub _IO_save_base: *mut ::core::ffi::c_char,
-    pub _IO_backup_base: *mut ::core::ffi::c_char,
-    pub _IO_save_end: *mut ::core::ffi::c_char,
-    pub _markers: *mut _IO_marker,
-    pub _chain: *mut _IO_FILE,
-    pub _fileno: ::core::ffi::c_int,
-    pub _flags2: ::core::ffi::c_int,
-    pub _old_offset: __off_t,
-    pub _cur_column: ::core::ffi::c_ushort,
-    pub _vtable_offset: ::core::ffi::c_schar,
-    pub _shortbuf: [::core::ffi::c_char; 1usize],
-    pub _lock: *mut _IO_lock_t,
-    pub _offset: __off64_t,
-    pub _codecvt: *mut _IO_codecvt,
-    pub _wide_data: *mut _IO_wide_data,
-    pub _freeres_list: *mut _IO_FILE,
-    pub _freeres_buf: *mut ::core::ffi::c_void,
-    pub __pad5: usize,
-    pub _mode: ::core::ffi::c_int,
-    pub _unused2: [::core::ffi::c_char; 20usize],
-}
-#[test]
-fn bindgen_test_layout__IO_FILE() {
-    const UNINIT: ::core::mem::MaybeUninit<_IO_FILE> = ::core::mem::MaybeUninit::uninit();
-    let ptr = UNINIT.as_ptr();
-    assert_eq!(
-        ::core::mem::size_of::<_IO_FILE>(),
-        216usize,
-        concat!("Size of: ", stringify!(_IO_FILE))
-    );
-    assert_eq!(
-        ::core::mem::align_of::<_IO_FILE>(),
-        8usize,
-        concat!("Alignment of ", stringify!(_IO_FILE))
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._flags) as usize - ptr as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_flags)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_read_ptr) as usize - ptr as usize },
-        8usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_read_ptr)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_read_end) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).flush) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
-            stringify!(_IO_FILE),
+            stringify!(__file),
             "::",
-            stringify!(_IO_read_end)
+            stringify!(flush)
         )
     );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __file_close {
+    pub file: __file,
+    pub close:
+        ::core::option::Option<unsafe extern "C" fn(arg1: *mut __file) -> ::core::ffi::c_int>,
+}
+#[test]
+fn bindgen_test_layout___file_close() {
+    const UNINIT: ::core::mem::MaybeUninit<__file_close> = ::core::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
     assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_read_base) as usize - ptr as usize },
+        ::core::mem::size_of::<__file_close>(),
         24usize,
+        concat!("Size of: ", stringify!(__file_close))
+    );
+    assert_eq!(
+        ::core::mem::align_of::<__file_close>(),
+        4usize,
+        concat!("Alignment of ", stringify!(__file_close))
+    );
+    assert_eq!(
+        unsafe { ::core::ptr::addr_of!((*ptr).file) as usize - ptr as usize },
+        0usize,
         concat!(
             "Offset of field: ",
-            stringify!(_IO_FILE),
+            stringify!(__file_close),
             "::",
-            stringify!(_IO_read_base)
+            stringify!(file)
         )
     );
     assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_write_base) as usize - ptr as usize },
-        32usize,
+        unsafe { ::core::ptr::addr_of!((*ptr).close) as usize - ptr as usize },
+        20usize,
         concat!(
             "Offset of field: ",
-            stringify!(_IO_FILE),
+            stringify!(__file_close),
             "::",
-            stringify!(_IO_write_base)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_write_ptr) as usize - ptr as usize },
-        40usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_write_ptr)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_write_end) as usize - ptr as usize },
-        48usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_write_end)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_buf_base) as usize - ptr as usize },
-        56usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_buf_base)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_buf_end) as usize - ptr as usize },
-        64usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_buf_end)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_save_base) as usize - ptr as usize },
-        72usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_save_base)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_backup_base) as usize - ptr as usize },
-        80usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_backup_base)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._IO_save_end) as usize - ptr as usize },
-        88usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_IO_save_end)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._markers) as usize - ptr as usize },
-        96usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_markers)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._chain) as usize - ptr as usize },
-        104usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_chain)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._fileno) as usize - ptr as usize },
-        112usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_fileno)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._flags2) as usize - ptr as usize },
-        116usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_flags2)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._old_offset) as usize - ptr as usize },
-        120usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_old_offset)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._cur_column) as usize - ptr as usize },
-        128usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_cur_column)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._vtable_offset) as usize - ptr as usize },
-        130usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_vtable_offset)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._shortbuf) as usize - ptr as usize },
-        131usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_shortbuf)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._lock) as usize - ptr as usize },
-        136usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_lock)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._offset) as usize - ptr as usize },
-        144usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_offset)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._codecvt) as usize - ptr as usize },
-        152usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_codecvt)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._wide_data) as usize - ptr as usize },
-        160usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_wide_data)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._freeres_list) as usize - ptr as usize },
-        168usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_freeres_list)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._freeres_buf) as usize - ptr as usize },
-        176usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_freeres_buf)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__pad5) as usize - ptr as usize },
-        184usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(__pad5)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._mode) as usize - ptr as usize },
-        192usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_mode)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr)._unused2) as usize - ptr as usize },
-        196usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(_IO_FILE),
-            "::",
-            stringify!(_unused2)
+            stringify!(close)
         )
     );
 }
-pub type off_t = __off_t;
-pub type fpos_t = __fpos_t;
+#[doc = "\\c FILE is the opaque structure that is passed around between the\nvarious standard IO functions."]
+pub type __FILE = __file;
+pub type FILE = __FILE;
 extern "C" {
-    pub static mut stdin: *mut FILE;
+    #[doc = "Stream that will be used as an input stream by the simplified\nfunctions that don't take a \\c stream argument."]
+    pub static stdin: *mut FILE;
 }
 extern "C" {
-    pub static mut stdout: *mut FILE;
+    #[doc = "Stream that will be used as an output stream by the simplified\nfunctions that don't take a \\c stream argument."]
+    pub static stdout: *mut FILE;
 }
 extern "C" {
-    pub static mut stderr: *mut FILE;
+    #[doc = "Stream destined for error output.  Unless specifically assigned,\nidentical to \\c stdout."]
+    pub static stderr: *mut FILE;
 }
 extern "C" {
-    pub fn remove(__filename: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
+    pub fn fdevopen(
+        __put: ::core::option::Option<
+            unsafe extern "C" fn(arg1: ::core::ffi::c_char, arg2: *mut FILE) -> ::core::ffi::c_int,
+        >,
+        __get: ::core::option::Option<unsafe extern "C" fn(arg1: *mut FILE) -> ::core::ffi::c_int>,
+        __flush: ::core::option::Option<
+            unsafe extern "C" fn(arg1: *mut FILE) -> ::core::ffi::c_int,
+        >,
+    ) -> *mut FILE;
 }
 extern "C" {
-    pub fn rename(
-        __old: *const ::core::ffi::c_char,
-        __new: *const ::core::ffi::c_char,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn renameat(
-        __oldfd: ::core::ffi::c_int,
-        __old: *const ::core::ffi::c_char,
-        __newfd: ::core::ffi::c_int,
-        __new: *const ::core::ffi::c_char,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn tmpfile() -> *mut FILE;
-}
-extern "C" {
-    pub fn tmpnam(__s: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
-}
-extern "C" {
-    pub fn tmpnam_r(__s: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
-}
-extern "C" {
-    pub fn tempnam(
-        __dir: *const ::core::ffi::c_char,
-        __pfx: *const ::core::ffi::c_char,
-    ) -> *mut ::core::ffi::c_char;
-}
-extern "C" {
+    #[doc = "This function closes \\c stream, and disallows and further\nIO to and from it.\n\nWhen using fdevopen() to setup the stream, a call to fclose() is\nneeded in order to free the internal resources allocated.\n\nIf the stream has been set up using fdev_setup_stream() or\nFDEV_SETUP_STREAM(), use fdev_close() instead.\n\nIt currently always returns 0 (for success)."]
     pub fn fclose(__stream: *mut FILE) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn fflush(__stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn fflush_unlocked(__stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn fopen(
-        __filename: *const ::core::ffi::c_char,
-        __modes: *const ::core::ffi::c_char,
-    ) -> *mut FILE;
-}
-extern "C" {
-    pub fn freopen(
-        __filename: *const ::core::ffi::c_char,
-        __modes: *const ::core::ffi::c_char,
-        __stream: *mut FILE,
-    ) -> *mut FILE;
-}
-extern "C" {
-    pub fn fdopen(__fd: ::core::ffi::c_int, __modes: *const ::core::ffi::c_char) -> *mut FILE;
-}
-extern "C" {
-    pub fn fmemopen(
-        __s: *mut ::core::ffi::c_void,
-        __len: usize,
-        __modes: *const ::core::ffi::c_char,
-    ) -> *mut FILE;
-}
-extern "C" {
-    pub fn open_memstream(
-        __bufloc: *mut *mut ::core::ffi::c_char,
-        __sizeloc: *mut usize,
-    ) -> *mut FILE;
-}
-extern "C" {
-    pub fn setbuf(__stream: *mut FILE, __buf: *mut ::core::ffi::c_char);
-}
-extern "C" {
-    pub fn setvbuf(
-        __stream: *mut FILE,
-        __buf: *mut ::core::ffi::c_char,
-        __modes: ::core::ffi::c_int,
-        __n: usize,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn setbuffer(__stream: *mut FILE, __buf: *mut ::core::ffi::c_char, __size: usize);
-}
-extern "C" {
-    pub fn setlinebuf(__stream: *mut FILE);
-}
-extern "C" {
-    pub fn fprintf(
-        __stream: *mut FILE,
-        __format: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn printf(__format: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn sprintf(
-        __s: *mut ::core::ffi::c_char,
-        __format: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
     pub fn vfprintf(
-        __s: *mut FILE,
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn vprintf(
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn vsprintf(
-        __s: *mut ::core::ffi::c_char,
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn snprintf(
-        __s: *mut ::core::ffi::c_char,
-        __maxlen: ::core::ffi::c_ulong,
-        __format: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn vsnprintf(
-        __s: *mut ::core::ffi::c_char,
-        __maxlen: ::core::ffi::c_ulong,
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn vdprintf(
-        __fd: ::core::ffi::c_int,
-        __fmt: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn dprintf(
-        __fd: ::core::ffi::c_int,
-        __fmt: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn fscanf(
         __stream: *mut FILE,
-        __format: *const ::core::ffi::c_char,
-        ...
+        __fmt: *const ::core::ffi::c_char,
+        __ap: __builtin_va_list,
     ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn scanf(__format: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn sscanf(
-        __s: *const ::core::ffi::c_char,
-        __format: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    #[link_name = "\u{1}__isoc99_fscanf"]
-    pub fn fscanf1(
-        __stream: *mut FILE,
-        __format: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    #[link_name = "\u{1}__isoc99_scanf"]
-    pub fn scanf1(__format: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
-}
-extern "C" {
-    #[link_name = "\u{1}__isoc99_sscanf"]
-    pub fn sscanf1(
-        __s: *const ::core::ffi::c_char,
-        __format: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn vfscanf(
-        __s: *mut FILE,
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn vscanf(
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn vsscanf(
-        __s: *const ::core::ffi::c_char,
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    #[link_name = "\u{1}__isoc99_vfscanf"]
-    pub fn vfscanf1(
-        __s: *mut FILE,
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    #[link_name = "\u{1}__isoc99_vscanf"]
-    pub fn vscanf1(
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    #[link_name = "\u{1}__isoc99_vsscanf"]
-    pub fn vsscanf1(
-        __s: *const ::core::ffi::c_char,
-        __format: *const ::core::ffi::c_char,
-        __arg: *mut __va_list_tag,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn fgetc(__stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn getc(__stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn getchar() -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn getc_unlocked(__stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn getchar_unlocked() -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn fgetc_unlocked(__stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
+    #[doc = "The function \\c fputc sends the character \\c c (though given as type\n\\c int) to \\c stream.  It returns the character, or \\c EOF in case\nan error occurred."]
     pub fn fputc(__c: ::core::ffi::c_int, __stream: *mut FILE) -> ::core::ffi::c_int;
 }
 extern "C" {
@@ -1688,179 +1122,246 @@ extern "C" {
     pub fn putchar(__c: ::core::ffi::c_int) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn fputc_unlocked(__c: ::core::ffi::c_int, __stream: *mut FILE) -> ::core::ffi::c_int;
+    #[doc = "The function \\c printf performs formatted output to stream\n\\c stdout.  See \\c vfprintf() for details."]
+    pub fn printf(__fmt: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn putc_unlocked(__c: ::core::ffi::c_int, __stream: *mut FILE) -> ::core::ffi::c_int;
+    #[doc = "The function \\c vprintf performs formatted output to stream\n\\c stdout, taking a variable argument list as in vfprintf().\n\nSee vfprintf() for details."]
+    pub fn vprintf(
+        __fmt: *const ::core::ffi::c_char,
+        __ap: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn putchar_unlocked(__c: ::core::ffi::c_int) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn getw(__stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn putw(__w: ::core::ffi::c_int, __stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn fgets(
+    #[doc = "Variant of \\c printf() that sends the formatted characters\nto string \\c s."]
+    pub fn sprintf(
         __s: *mut ::core::ffi::c_char,
-        __n: ::core::ffi::c_int,
+        __fmt: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Like \\c sprintf(), but instead of assuming \\c s to be of infinite\nsize, no more than \\c n characters (including the trailing NUL\ncharacter) will be converted to \\c s.\n\nReturns the number of characters that would have been written to\n\\c s if there were enough space."]
+    pub fn snprintf(
+        __s: *mut ::core::ffi::c_char,
+        __n: ::core::ffi::c_uint,
+        __fmt: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Like \\c sprintf() but takes a variable argument list for the\narguments."]
+    pub fn vsprintf(
+        __s: *mut ::core::ffi::c_char,
+        __fmt: *const ::core::ffi::c_char,
+        ap: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Like \\c vsprintf(), but instead of assuming \\c s to be of infinite\nsize, no more than \\c n characters (including the trailing NUL\ncharacter) will be converted to \\c s.\n\nReturns the number of characters that would have been written to\n\\c s if there were enough space."]
+    pub fn vsnprintf(
+        __s: *mut ::core::ffi::c_char,
+        __n: ::core::ffi::c_uint,
+        __fmt: *const ::core::ffi::c_char,
+        ap: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Variant of \\c printf() that sends the formatted characters\nto allocated string \\c *strp."]
+    pub fn asprintf(
+        strp: *mut *mut ::core::ffi::c_char,
+        fmt: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Variant of \\c vprintf() that sends the formatted characters\nto allocated string \\c *strp."]
+    pub fn vasprintf(
+        strp: *mut *mut ::core::ffi::c_char,
+        fmt: *const ::core::ffi::c_char,
+        ap: va_list,
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "The function \\c fprintf performs formatted output to \\c stream.\nSee \\c vfprintf() for details."]
+    pub fn fprintf(
+        __stream: *mut FILE,
+        __fmt: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Write the string pointed to by \\c str to stream \\c stream.\n\nReturns 0 on success and EOF on error."]
+    pub fn fputs(__str: *const ::core::ffi::c_char, __stream: *mut FILE) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Write the string pointed to by \\c str, and a trailing newline\ncharacter, to \\c stdout."]
+    pub fn puts(__str: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Write \\c nmemb objects, \\c size bytes each, to \\c stream.\nThe first byte of the first object is referenced by \\c ptr.\n\nReturns the number of objects successfully written, i. e.\n\\c nmemb unless an output error occured."]
+    pub fn fwrite(
+        __ptr: *const ::core::ffi::c_void,
+        __size: ::core::ffi::c_uint,
+        __nmemb: ::core::ffi::c_uint,
+        __stream: *mut FILE,
+    ) -> ::core::ffi::c_uint;
+}
+extern "C" {
+    #[doc = "The function \\c fgetc reads a character from \\c stream.  It returns\nthe character, or \\c EOF in case end-of-file was encountered or an\nerror occurred.  The routines feof() or ferror() must be used to\ndistinguish between both situations."]
+    pub fn fgetc(__stream: *mut FILE) -> ::core::ffi::c_int;
+}
+extern "C" {
+    pub fn getc(__stream: *mut FILE) -> ::core::ffi::c_int;
+}
+extern "C" {
+    pub fn getchar() -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "The ungetc() function pushes the character \\c c (converted to an\nunsigned char) back onto the input stream pointed to by \\c stream.\nThe pushed-back character will be returned by a subsequent read on\nthe stream.\n\nCurrently, only a single character can be pushed back onto the\nstream.\n\nThe ungetc() function returns the character pushed back after the\nconversion, or \\c EOF if the operation fails.  If the value of the\nargument \\c c character equals \\c EOF, the operation will fail and\nthe stream will remain unchanged."]
+    pub fn ungetc(__c: ::core::ffi::c_int, __stream: *mut FILE) -> ::core::ffi::c_int;
+}
+extern "C" {
+    #[doc = "Read at most <tt>size - 1</tt> bytes from \\c stream, until a\nnewline character was encountered, and store the characters in the\nbuffer pointed to by \\c str.  Unless an error was encountered while\nreading, the string will then be terminated with a \\c NUL\ncharacter.\n\nIf an error was encountered, the function returns NULL and sets the\nerror flag of \\c stream, which can be tested using ferror().\nOtherwise, a pointer to the string will be returned."]
+    pub fn fgets(
+        __str: *mut ::core::ffi::c_char,
+        __size: ::core::ffi::c_int,
         __stream: *mut FILE,
     ) -> *mut ::core::ffi::c_char;
 }
 extern "C" {
-    pub fn __getdelim(
-        __lineptr: *mut *mut ::core::ffi::c_char,
-        __n: *mut usize,
-        __delimiter: ::core::ffi::c_int,
-        __stream: *mut FILE,
-    ) -> __ssize_t;
+    #[doc = "Similar to fgets() except that it will operate on stream \\c stdin,\nand the trailing newline (if any) will not be stored in the string.\nIt is the caller's responsibility to provide enough storage to hold\nthe characters read."]
+    pub fn gets(__str: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
 }
 extern "C" {
-    pub fn getdelim(
-        __lineptr: *mut *mut ::core::ffi::c_char,
-        __n: *mut usize,
-        __delimiter: ::core::ffi::c_int,
-        __stream: *mut FILE,
-    ) -> __ssize_t;
-}
-extern "C" {
-    pub fn getline(
-        __lineptr: *mut *mut ::core::ffi::c_char,
-        __n: *mut usize,
-        __stream: *mut FILE,
-    ) -> __ssize_t;
-}
-extern "C" {
-    pub fn fputs(__s: *const ::core::ffi::c_char, __stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn puts(__s: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn ungetc(__c: ::core::ffi::c_int, __stream: *mut FILE) -> ::core::ffi::c_int;
-}
-extern "C" {
+    #[doc = "Read \\c nmemb objects, \\c size bytes each, from \\c stream,\nto the buffer pointed to by \\c ptr.\n\nReturns the number of objects successfully read, i. e.\n\\c nmemb unless an input error occured or end-of-file was\nencountered.  feof() and ferror() must be used to distinguish\nbetween these two conditions."]
     pub fn fread(
         __ptr: *mut ::core::ffi::c_void,
-        __size: ::core::ffi::c_ulong,
-        __n: ::core::ffi::c_ulong,
+        __size: ::core::ffi::c_uint,
+        __nmemb: ::core::ffi::c_uint,
         __stream: *mut FILE,
-    ) -> ::core::ffi::c_ulong;
+    ) -> ::core::ffi::c_uint;
 }
 extern "C" {
-    pub fn fwrite(
-        __ptr: *const ::core::ffi::c_void,
-        __size: ::core::ffi::c_ulong,
-        __n: ::core::ffi::c_ulong,
-        __s: *mut FILE,
-    ) -> ::core::ffi::c_ulong;
-}
-extern "C" {
-    pub fn fread_unlocked(
-        __ptr: *mut ::core::ffi::c_void,
-        __size: usize,
-        __n: usize,
-        __stream: *mut FILE,
-    ) -> usize;
-}
-extern "C" {
-    pub fn fwrite_unlocked(
-        __ptr: *const ::core::ffi::c_void,
-        __size: usize,
-        __n: usize,
-        __stream: *mut FILE,
-    ) -> usize;
-}
-extern "C" {
-    pub fn fseek(
-        __stream: *mut FILE,
-        __off: ::core::ffi::c_long,
-        __whence: ::core::ffi::c_int,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn ftell(__stream: *mut FILE) -> ::core::ffi::c_long;
-}
-extern "C" {
-    pub fn rewind(__stream: *mut FILE);
-}
-extern "C" {
-    pub fn fseeko(
-        __stream: *mut FILE,
-        __off: __off_t,
-        __whence: ::core::ffi::c_int,
-    ) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn ftello(__stream: *mut FILE) -> __off_t;
-}
-extern "C" {
-    pub fn fgetpos(__stream: *mut FILE, __pos: *mut fpos_t) -> ::core::ffi::c_int;
-}
-extern "C" {
-    pub fn fsetpos(__stream: *mut FILE, __pos: *const fpos_t) -> ::core::ffi::c_int;
-}
-extern "C" {
+    #[doc = "Clear the error and end-of-file flags of \\c stream."]
     pub fn clearerr(__stream: *mut FILE);
 }
 extern "C" {
+    #[doc = "Test the end-of-file flag of \\c stream.  This flag can only be cleared\nby a call to clearerr()."]
     pub fn feof(__stream: *mut FILE) -> ::core::ffi::c_int;
 }
 extern "C" {
+    #[doc = "Test the error flag of \\c stream.  This flag can only be cleared\nby a call to clearerr()."]
     pub fn ferror(__stream: *mut FILE) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn clearerr_unlocked(__stream: *mut FILE);
+    pub fn vfscanf(
+        __stream: *mut FILE,
+        __fmt: *const ::core::ffi::c_char,
+        __ap: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn feof_unlocked(__stream: *mut FILE) -> ::core::ffi::c_int;
+    #[doc = "The function \\c fscanf performs formatted input, reading the\ninput data from \\c stream.\n\nSee vfscanf() for details."]
+    pub fn fscanf(
+        __stream: *mut FILE,
+        __fmt: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn ferror_unlocked(__stream: *mut FILE) -> ::core::ffi::c_int;
+    #[doc = "The function \\c scanf performs formatted input from stream \\c stdin.\n\nSee vfscanf() for details."]
+    pub fn scanf(__fmt: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn perror(__s: *const ::core::ffi::c_char);
+    #[doc = "The function \\c vscanf performs formatted input from stream\n\\c stdin, taking a variable argument list as in vfscanf().\n\nSee vfscanf() for details."]
+    pub fn vscanf(__fmt: *const ::core::ffi::c_char, __ap: __builtin_va_list)
+        -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub static mut sys_nerr: ::core::ffi::c_int;
+    #[doc = "The function \\c sscanf performs formatted input, reading the\ninput data from the buffer pointed to by \\c buf.\n\nSee vfscanf() for details."]
+    pub fn sscanf(
+        __buf: *const ::core::ffi::c_char,
+        __fmt: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub static sys_errlist: [*const ::core::ffi::c_char; 0usize];
+    #[doc = "The function \\c vscanf performs formatted input, reading the\ninput data from the buffer pointed to by \\c buf.\n\nSee vfscanf() for details."]
+    pub fn vsscanf(
+        __buf: *const ::core::ffi::c_char,
+        __fmt: *const ::core::ffi::c_char,
+        ap: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn fileno(__stream: *mut FILE) -> ::core::ffi::c_int;
+    #[doc = "Flush \\c stream.\n\nIf the stream provides a flush hook, use that. Otherwise return 0."]
+    pub fn fflush(stream: *mut FILE) -> ::core::ffi::c_int;
+}
+pub type fpos_t = ::core::ffi::c_longlong;
+extern "C" {
+    pub fn fgetpos(stream: *mut FILE, pos: *mut fpos_t) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn fileno_unlocked(__stream: *mut FILE) -> ::core::ffi::c_int;
+    pub fn fopen(path: *const ::core::ffi::c_char, mode: *const ::core::ffi::c_char) -> *mut FILE;
 }
 extern "C" {
-    pub fn popen(
-        __command: *const ::core::ffi::c_char,
-        __modes: *const ::core::ffi::c_char,
+    pub fn freopen(
+        path: *const ::core::ffi::c_char,
+        mode: *const ::core::ffi::c_char,
+        stream: *mut FILE,
     ) -> *mut FILE;
 }
 extern "C" {
-    pub fn pclose(__stream: *mut FILE) -> ::core::ffi::c_int;
+    pub fn fdopen(arg1: ::core::ffi::c_int, arg2: *const ::core::ffi::c_char) -> *mut FILE;
 }
 extern "C" {
-    pub fn ctermid(__s: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
+    pub fn fseek(
+        stream: *mut FILE,
+        offset: ::core::ffi::c_long,
+        whence: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn flockfile(__stream: *mut FILE);
+    pub fn fsetpos(stream: *mut FILE, pos: *mut fpos_t) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn ftrylockfile(__stream: *mut FILE) -> ::core::ffi::c_int;
+    pub fn ftell(stream: *mut FILE) -> ::core::ffi::c_long;
 }
 extern "C" {
-    pub fn funlockfile(__stream: *mut FILE);
+    pub fn fileno(arg1: *mut FILE) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn __uflow(arg1: *mut FILE) -> ::core::ffi::c_int;
+    pub fn perror(s: *const ::core::ffi::c_char);
 }
 extern "C" {
-    pub fn __overflow(arg1: *mut FILE, arg2: ::core::ffi::c_int) -> ::core::ffi::c_int;
+    pub fn remove(pathname: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
+}
+extern "C" {
+    pub fn rename(
+        oldpath: *const ::core::ffi::c_char,
+        newpath: *const ::core::ffi::c_char,
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    pub fn rewind(stream: *mut FILE);
+}
+extern "C" {
+    pub fn setbuf(stream: *mut FILE, buf: *mut ::core::ffi::c_char);
+}
+extern "C" {
+    pub fn setvbuf(
+        stream: *mut FILE,
+        buf: *mut ::core::ffi::c_char,
+        mode: ::core::ffi::c_int,
+        size: usize,
+    ) -> ::core::ffi::c_int;
+}
+extern "C" {
+    pub fn tmpfile() -> *mut FILE;
+}
+extern "C" {
+    pub fn tmpnam(s: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1874,12 +1375,12 @@ fn bindgen_test_layout_luaL_Reg() {
     let ptr = UNINIT.as_ptr();
     assert_eq!(
         ::core::mem::size_of::<luaL_Reg>(),
-        16usize,
+        8usize,
         concat!("Size of: ", stringify!(luaL_Reg))
     );
     assert_eq!(
         ::core::mem::align_of::<luaL_Reg>(),
-        8usize,
+        4usize,
         concat!("Alignment of ", stringify!(luaL_Reg))
     );
     assert_eq!(
@@ -1894,7 +1395,7 @@ fn bindgen_test_layout_luaL_Reg() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).func) as usize - ptr as usize },
-        8usize,
+        4usize,
         concat!(
             "Offset of field: ",
             stringify!(luaL_Reg),
@@ -2073,7 +1574,7 @@ pub struct luaL_Buffer {
     pub p: *mut ::core::ffi::c_char,
     pub lvl: ::core::ffi::c_int,
     pub L: *mut lua_State,
-    pub buffer: [::core::ffi::c_char; 8192usize],
+    pub buffer: [::core::ffi::c_char; 512usize],
 }
 #[test]
 fn bindgen_test_layout_luaL_Buffer() {
@@ -2081,12 +1582,12 @@ fn bindgen_test_layout_luaL_Buffer() {
     let ptr = UNINIT.as_ptr();
     assert_eq!(
         ::core::mem::size_of::<luaL_Buffer>(),
-        8216usize,
+        524usize,
         concat!("Size of: ", stringify!(luaL_Buffer))
     );
     assert_eq!(
         ::core::mem::align_of::<luaL_Buffer>(),
-        8usize,
+        4usize,
         concat!("Alignment of ", stringify!(luaL_Buffer))
     );
     assert_eq!(
@@ -2101,7 +1602,7 @@ fn bindgen_test_layout_luaL_Buffer() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).lvl) as usize - ptr as usize },
-        8usize,
+        4usize,
         concat!(
             "Offset of field: ",
             stringify!(luaL_Buffer),
@@ -2111,7 +1612,7 @@ fn bindgen_test_layout_luaL_Buffer() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).L) as usize - ptr as usize },
-        16usize,
+        8usize,
         concat!(
             "Offset of field: ",
             stringify!(luaL_Buffer),
@@ -2121,7 +1622,7 @@ fn bindgen_test_layout_luaL_Buffer() {
     );
     assert_eq!(
         unsafe { ::core::ptr::addr_of!((*ptr).buffer) as usize - ptr as usize },
-        24usize,
+        12usize,
         concat!(
             "Offset of field: ",
             stringify!(luaL_Buffer),
@@ -2148,67 +1649,4 @@ extern "C" {
 extern "C" {
     pub fn luaL_pushresult(B: *mut luaL_Buffer);
 }
-pub type __builtin_va_list = [__va_list_tag; 1usize];
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct __va_list_tag {
-    pub gp_offset: ::core::ffi::c_uint,
-    pub fp_offset: ::core::ffi::c_uint,
-    pub overflow_arg_area: *mut ::core::ffi::c_void,
-    pub reg_save_area: *mut ::core::ffi::c_void,
-}
-#[test]
-fn bindgen_test_layout___va_list_tag() {
-    const UNINIT: ::core::mem::MaybeUninit<__va_list_tag> = ::core::mem::MaybeUninit::uninit();
-    let ptr = UNINIT.as_ptr();
-    assert_eq!(
-        ::core::mem::size_of::<__va_list_tag>(),
-        24usize,
-        concat!("Size of: ", stringify!(__va_list_tag))
-    );
-    assert_eq!(
-        ::core::mem::align_of::<__va_list_tag>(),
-        8usize,
-        concat!("Alignment of ", stringify!(__va_list_tag))
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).gp_offset) as usize - ptr as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__va_list_tag),
-            "::",
-            stringify!(gp_offset)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).fp_offset) as usize - ptr as usize },
-        4usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__va_list_tag),
-            "::",
-            stringify!(fp_offset)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).overflow_arg_area) as usize - ptr as usize },
-        8usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__va_list_tag),
-            "::",
-            stringify!(overflow_arg_area)
-        )
-    );
-    assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).reg_save_area) as usize - ptr as usize },
-        16usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__va_list_tag),
-            "::",
-            stringify!(reg_save_area)
-        )
-    );
-}
+pub type __builtin_va_list = *mut ::core::ffi::c_void;
